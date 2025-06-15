@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import animationData from "@/assets/boy-running.json";
-import AnimationForCard from "@/components/AnimationForCard";
+import AnimationForCard from "@/components/common/AnimationForCard";
 // import AnimationComponent from '@/components/AnimationComponent';
 import VideoComponent from "@/components/VideoComponent";
 
@@ -12,6 +12,7 @@ export default function FortuneWealthHome() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       {/*<VideoComponent videoPath="/videos/yuki-and-kazuki.webm" className="w-50 h-50" />*/}
+      
       <motion.div
         initial={{ scale: 0.8, opacity: 0.5 }}
         animate={{ scale: 1, opacity: 1 }}

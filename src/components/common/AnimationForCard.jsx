@@ -1,4 +1,5 @@
 // components/AnimatedCardWrapper.jsx
+// cardの上などにのぞき込んだり、淵を移動したりのアニメーション用
 import { Player } from '@lottiefiles/react-lottie-player';
 
 import PropTypes from "prop-types";

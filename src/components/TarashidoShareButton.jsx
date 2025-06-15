@@ -1,0 +1,76 @@
+import { Copy } from "lucide-react";
+
+const TarashidoShareButton = ({ url, text, imageUrl }) => {
+  // URLコピー用
+  const handleCopy = () => {
+    navigator.clipboard.writeText(url);
+    alert("診断ページURLをコピーしました！");
+  };
+
+  // Instagram・TikTokには画像保存推奨（今はリンクのみ案内）
+  // imageUrlが用意できた場合は img タグなどで保存ボタン設置可
+
+  return (
+    <div className="flex flex-wrap gap-3 justify-center mt-6">
+      {/* X（旧Twitter） */}
+      <a
+        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-black hover:bg-slate-800 text-white px-4 py-2 rounded-xl shadow transition flex items-center gap-2"
+      >
+        <svg width="22" height="22" fill="currentColor" className="inline"><use href="#icon-x"/></svg>
+        Xでシェア
+      </a>
+
+      {/* LINE */}
+      <a
+        href={`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-xl shadow transition flex items-center gap-2"
+      >
+        <svg width="22" height="22" fill="currentColor" className="inline"><use href="#icon-line"/></svg>
+        LINEで送る
+      </a>
+
+      {/* Instagram */}
+      <button
+        onClick={handleCopy}
+        className="bg-gradient-to-r from-pink-400 via-red-400 to-yellow-400 text-white px-4 py-2 rounded-xl shadow transition flex items-center gap-2"
+      >
+        <svg width="22" height="22" fill="currentColor" className="inline"><use href="#icon-instagram"/></svg>
+        Instagram用リンクコピー
+      </button>
+
+      {/* TikTok */}
+      <button
+        onClick={handleCopy}
+        className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-xl shadow transition flex items-center gap-2"
+      >
+        <svg width="22" height="22" fill="currentColor" className="inline"><use href="#icon-tiktok"/></svg>
+        TikTok用リンクコピー
+      </button>
+    </div>
+  );
+};
+
+export default TarashidoShareButton;
+
+/* SVG Sprite（Appのどこかで定義しておくとアイコンが使えます）
+<svg style={{display: "none"}}>
+  <symbol id="icon-x" viewBox="0 0 24 24">
+    <path d="M17.53 3H21.5l-7.32 8.36L22.58 21h-6.67l-5.14-6.17L4.02 21H0.05l7.91-9.04L1 3h6.81l4.68 5.61L17.53 3zm-2.16 16h2.3L7.23 5H4.8l10.57 14z" />
+  </symbol>
+  <symbol id="icon-line" viewBox="0 0 50 50">
+    <path d="M25,4C12.3,4,2,13.1,2,24c0,6.1,3.7,11.6,9.5,15.4L8,46.6c-0.1,0.5,0,1.1,0.4,1.5c0.4,0.3,0.9,0.3,1.3,0l6.4-3.9 c2.8,0.8,5.7,1.3,8.8,1.3c12.7,0,23-9.1,23-20S37.7,4,25,4z" />
+  </symbol>
+  <symbol id="icon-instagram" viewBox="0 0 24 24">
+    <path d="M7.75,2h8.5C19.55,2,22,4.45,22,7.75v8.5C22,19.55,19.55,22,16.25,22h-8.5C4.45,22,2,19.55,2,16.25v-8.5C2,4.45,4.45,2,7.75,2z M12,7.5c-2.49,0-4.5,2.01-4.5,4.5s2.01,4.5,4.5,4.5s4.5-2.01,4.5-4.5S14.49,7.5,12,7.5z M17.5,7c0.69,0,1.25-0.56,1.25-1.25 S18.19,4.5,17.5,4.5S16.25,5.06,16.25,5.75S16.81,7,17.5,7z"/>
+  </symbol>
+  <symbol id="icon-tiktok" viewBox="0 0 24 24">
+    <path d="M12.67,2H19a1,1,0,0,1,1,1v1.38a6.44,6.44,0,0,0,3,1V9.13a9.46,9.46,0,0,1-3-1V17a7,7,0,1,1-7-7v2.12a5,5,0,1,0,5,5V3A1,1,0,0,0,18,2Z"/>
+  </symbol>
+</svg>
+*/
+

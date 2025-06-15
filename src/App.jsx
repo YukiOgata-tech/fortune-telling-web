@@ -6,7 +6,8 @@ import Footer from "@/components/common/Footer";
 import Background3DSpace from "@/components/common/Background3DSpace";
 import ScrollToTop from "@/components/ScrollToTop";
 import RequireAuth from "@/components/features/RequireAuth";
-import SpaceLoading from "./components/common/SpaceLoader";
+import SpaceLoading from "@/components/common/SpaceLoader";
+import SvgSprite from "@/components/SvgSprite";
 // pages import
 import DiagnosePage from "@/pages/DiagnosePage";
 import QuestionnairePage from "@/pages/QuestionnairePage";
@@ -19,6 +20,8 @@ import { DashboardPage, VerifyEmailPage} from "@/pages/AccountPages";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
+import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
+import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
 
 
 function App() {
@@ -64,11 +67,15 @@ function App() {
           <Route path="/fortune-wealth/question" element={<FortuneWealthQuestion />} />
           <Route path="/fortune-wealth/result" element={<FortuneWealthResult />} />
 
+          <Route path="/tarashido" element={<TarashidoDiagnosePage />} />
+          <Route path="/tarashido/result" element={<TarashidoResultPage />} />
+
 
         </Routes>
       </main>
     <Footer/>
     </div>
+    <SvgSprite />
     </BrowserRouter>
   )
 }

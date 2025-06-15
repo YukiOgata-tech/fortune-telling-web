@@ -5,6 +5,7 @@ import StaticNoise from "@/components/StaticNoise";
 import ElectricSpark from "@/components/ElectricSpark";
 import DailyFortuneCTA from "@/components/DailyFortuneCTA";
 import WealthFortuneCTA from "@/components/WealthFortuneCTA";
+import TarashidoCTA from "@/components/TarashidoCTA";
 
 
 /** --------------------------------------------------
@@ -99,6 +100,7 @@ const DiagnosePage = () => {
       </section>
       <DailyFortuneCTA className="mb-4" />
       <WealthFortuneCTA className="mb-4"/>
+      <TarashidoCTA className="mb-4" />
     </div>
   );
 };
