@@ -1,13 +1,12 @@
 // tarashidoResults.js
-
 const tarashidoResults = [
   {
     min: 0,
     max: 9,
-    type: "スーパー陰キャ",
+    type: "陰GOD",
     badge: "Moon",
-    comment: "自分の世界観を何より大事にする“真のソロプレイヤー”。無理に人たらしを目指さず、自分のペースを大切に！",
-    image: null,
+    comment: "自覚済みの”孤独モノ”あなたを気に掛けてくれる人、、いる？？",
+    image: null
   },
   {
     min: 10,
@@ -28,7 +27,7 @@ const tarashidoResults = [
   {
     min: 30,
     max: 39,
-    type: "陰キャ",
+    type: "まああんたは陰キャや",
     badge: "Ghost",
     comment: "慎重派だけど、実は仲良くなった人には超おしゃべり。ギャップで人気出るかも？",
     image: null,
@@ -36,7 +35,7 @@ const tarashidoResults = [
   {
     min: 40,
     max: 49,
-    type: "ピュア型",
+    type: "ピュア型人間",
     badge: "Sparkle",
     comment: "素直でピュア。天然の癒し系！無理せずそのままの自分でOK。",
     image: null,
@@ -44,9 +43,9 @@ const tarashidoResults = [
   {
     min: 50,
     max: 59,
-    type: "ピュア型",
+    type: "ピュアを装えるタラシ人間",
     badge: "Sparkle",
-    comment: "どこか抜けてる可愛さと安心感で周囲を和ませる“癒しキャラ”。",
+    comment: "どこか抜けてる可愛さと安心感で周囲を和ませる“癒しキャラ”、、、を装えてる。",
     image: null,
   },
   {
@@ -54,7 +53,7 @@ const tarashidoResults = [
     max: 69,
     type: "紳士型",
     badge: "Gem",
-    comment: "誠実で思いやりがあり、気配り力も抜群。誰からも信頼される“紳士/淑女タイプ”。",
+    comment: "誠実で思いやりがあり、気配り力も抜群。誰からも信頼される“紳士/淑女タイプ”。ただここぞというときに、相手を気にしてスイッチをONにしきれない。でもそれが世の中のバランスを保っているよ。ありがとう☺",
     image: null,
   },
   {
@@ -78,15 +77,15 @@ const tarashidoResults = [
     max: 99,
     type: "スーパー陽キャ",
     badge: "SunMedium",
-    comment: "超絶パリピ！どんな空間でも主役になれる“伝説の陽キャ”。",
+    comment: "超絶パリピ！どんな空間でも主役になれる“伝説の陽キャ”。陰キャも盛り上げちゃうあなたは社会のHERO！！",
     image: null,
   },
   {
     min: 100,
     max: 100,
-    type: "スーパー陽キャ",
+    type: "陽キャ界の太陽☼",
     badge: "SunMedium",
-    comment: "伝説のスーパー陽キャ！あなたの周りは常に笑顔と活気であふれてる！",
+    comment: "伝説の太陽！今後あなたが何をしても周りは、眩しくて付いてくることは不可能。少しでも光の放出を抑える必要があります。",
     image: null,
   },
 ];

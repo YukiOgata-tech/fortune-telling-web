@@ -5,7 +5,7 @@ import StaticNoise from "@/components/StaticNoise";
 import ElectricSpark from "@/components/ElectricSpark";
 import DailyFortuneCTA from "@/components/DailyFortuneCTA";
 import WealthFortuneCTA from "@/components/WealthFortuneCTA";
-import TarashidoCTA from "@/components/TarashidoCTA";
+import TarashidoCTA from "@/components/tarashido/TarashidoCTA";
 
 
 /** --------------------------------------------------
