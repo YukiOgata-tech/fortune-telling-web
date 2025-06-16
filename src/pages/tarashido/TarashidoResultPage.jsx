@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import tarashidoResults from "@/data/tarashidoResults";
 import TarashidoResultBadge from "@/components/tarashido/TarashidoResultBadge";
 import TarashidoShareButton from "@/components/tarashido/TarashidoShareButton";
-import AnimatedScore from "@/components/AnimatedScore";
+import AnimatedScore from "@/components/tarashido/AnimatedScore";
 import { motion } from "framer-motion";
 
 const TarashidoResultPage = () => {

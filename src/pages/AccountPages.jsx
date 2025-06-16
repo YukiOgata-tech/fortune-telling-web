@@ -14,6 +14,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { LogoutButton, SwitchAccountButton } from "@/components/features/AccountActionButtons";
 import NicknameEdit from "@/components/features/NicknameEdit";
+import BirthdayEdit from "@/components/features/BirthdayEdit";
 
 /* --------------- Generic Gradient BG --------------- */
 const GradientWrap = ({ children }) => (
@@ -114,6 +115,7 @@ export const DashboardPage = () => {
             <CardTitle className="text-2xl font-semibold biz-udpmincho-regular">設定変更</CardTitle>
           </CardHeader>
           <NicknameEdit/>
+          <BirthdayEdit/>
         </Card>
         
       </motion.div>

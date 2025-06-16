@@ -7,7 +7,7 @@ import Background3DSpace from "@/components/common/Background3DSpace";
 import ScrollToTop from "@/components/ScrollToTop";
 import RequireAuth from "@/components/features/RequireAuth";
 import SpaceLoading from "@/components/common/SpaceLoader";
-import SvgSprite from "@/components/SvgSprite";
+import SvgSprite from "@/components/common/SvgSprite";
 // pages import
 import DiagnosePage from "@/pages/DiagnosePage";
 import QuestionnairePage from "@/pages/QuestionnairePage";

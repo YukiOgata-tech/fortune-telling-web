@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import StaticNoise from "@/components/StaticNoise";
 import ElectricSpark from "@/components/ElectricSpark";
 import DailyFortuneCTA from "@/components/DailyFortuneCTA";
-import WealthFortuneCTA from "@/components/WealthFortuneCTA";
+import WealthFortuneCTA from "@/components/wealth/WealthFortuneCTA";
 import TarashidoCTA from "@/components/tarashido/TarashidoCTA";
 import ReincarnationCTA from "@/components/reincarnation/ReincarnationCTA";
 

@@ -6,13 +6,13 @@ const positionClass = {
   "top-left":   "fixed top-4 left-4",
   "bottom-right": "fixed bottom-4 right-4",
   "bottom-left":  "fixed bottom-4 left-4",
-  "center":     "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+  "center":     "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
 };
 
 const LoginStatus = ({
-  position = "top-right",   // デフォルトは右上
-  className = "",           // 追加カスタムクラス
-  style = {},               // インラインスタイルも渡せる
+  position = "top-right",   // デフォ右上
+  className = "",           // 追加クラス
+  style = {},               // スタイルも渡せます
   ...rest                  // その他propsも受け入れ
 }) => {
   const { user } = useAuth();

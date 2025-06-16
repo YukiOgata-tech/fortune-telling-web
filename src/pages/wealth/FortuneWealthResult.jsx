@@ -1,7 +1,7 @@
 // src/pages/wealth/FortuneWealthResult.jsx
 import { useEffect, useState } from "react";
-import MoneyGlitchEffect from "@/components/MoneyGlitchEffect";
-import ShareButtons from "@/components/ShareButtons";
+import MoneyGlitchEffect from "@/components/wealth/MoneyGlitchEffect";
+import ShareButtons from "@/components/wealth/ShareButtons";
 import { getWealthResult } from "@/data/wealth-releted/calculateWealthPower";
 
 export default function FortuneWealthResult() {

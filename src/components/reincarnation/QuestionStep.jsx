@@ -19,7 +19,7 @@ export default function QuestionStep({ question, onSelect }) {
       <div
         className="absolute inset-0 z-0 opacity-70"
         style={{
-          backgroundImage: "url('/public/images/reincarnation-bg.png')",
+          backgroundImage: "url('/images/reincarnation-bg.png')",
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",

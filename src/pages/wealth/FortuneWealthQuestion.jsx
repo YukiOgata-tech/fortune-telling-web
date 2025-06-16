@@ -1,8 +1,12 @@
 // src/pages/wealth/FortuneWealthQuestion.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ProgressBar from "@/components/ProgressBar";
+import ProgressBar from "@/components/wealth/ProgressBar";
 import { motion, AnimatePresence } from "framer-motion";
+// 追加
+import { useAuth } from "@/components/features/AuthContext";
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 // --- 外で宣言 ---
 function MotionCard({ children, className = "" }) {
@@ -54,7 +58,7 @@ const steps = ["profile", "question1", "question2", "question3"];
 const QUESTION_COUNT = questionItems.length;
 
 // --- ProfileStepも外で宣言 ---
-function ProfileStep({ form, setForm, error, validateProfile, setStep }) {
+function ProfileStep({ form, setForm, error, validateProfile, setStep, birthdayDisabled }) {
   const yearList = [];
   const nowYear = new Date().getFullYear();
   for (let y = nowYear - 100; y <= nowYear; y++) yearList.push(y);
@@ -109,6 +113,7 @@ function ProfileStep({ form, setForm, error, validateProfile, setStep }) {
                   birth: { ...f.birth, year: e.target.value }
                 }))
               }
+              disabled={birthdayDisabled}
             >
               <option value="">年</option>
               {yearList.map(y => (
@@ -126,6 +131,7 @@ function ProfileStep({ form, setForm, error, validateProfile, setStep }) {
                   birth: { ...f.birth, month: e.target.value }
                 }))
               }
+              disabled={birthdayDisabled}
             >
               <option value="">月</option>
               {[...Array(12)].map((_, i) => (
@@ -143,6 +149,7 @@ function ProfileStep({ form, setForm, error, validateProfile, setStep }) {
                   birth: { ...f.birth, day: e.target.value }
                 }))
               }
+              disabled={birthdayDisabled}
             >
               <option value="">日</option>
               {[...Array(31)].map((_, i) => (
@@ -168,7 +175,6 @@ function ProfileStep({ form, setForm, error, validateProfile, setStep }) {
   );
 }
 
-
 function QuestionStep({ idx, form, setForm, setStep, navigate }) {
   return (
     <MotionCard>
@@ -181,28 +187,23 @@ function QuestionStep({ idx, form, setForm, setStep, navigate }) {
             key={opt.key}
             className="w-full bg-gray-800 hover:bg-yellow-400 hover:text-black transition-colors rounded-xl px-4 py-3 text-left text-gray-100 font-medium shadow"
             onClick={() => {
-  // まず answers 配列だけ更新
-  setForm(f => {
-    const arr = [...f.answers];
-    arr[idx] = opt.key;
-    return { ...f, answers: arr };
-  });
-
-  // そして step の進行 or 遷移は「setForm」の直後・外で行う
-  if (idx < QUESTION_COUNT - 1) {
-    setStep(s => s + 1);
-  } else {
-    // ここは answers の更新後に必ず呼ばれる
-    setTimeout(() => {
-      // 最新の answers で保存
-      const answers = [...form.answers];
-      answers[idx] = opt.key;
-      const nextForm = { ...form, answers };
-      localStorage.setItem("fortuneWealthForm", JSON.stringify(nextForm));
-      navigate("/fortune-wealth/result");
-    }, 10); // 微小ディレイ
-  }
-}}
+              setForm(f => {
+                const arr = [...f.answers];
+                arr[idx] = opt.key;
+                return { ...f, answers: arr };
+              });
+              if (idx < QUESTION_COUNT - 1) {
+                setStep(s => s + 1);
+              } else {
+                setTimeout(() => {
+                  const answers = [...form.answers];
+                  answers[idx] = opt.key;
+                  const nextForm = { ...form, answers };
+                  localStorage.setItem("fortuneWealthForm", JSON.stringify(nextForm));
+                  navigate("/fortune-wealth/result");
+                }, 10);
+              }
+            }}
           >
             {opt.label}
           </motion.button>
@@ -212,8 +213,8 @@ function QuestionStep({ idx, form, setForm, setStep, navigate }) {
   );
 }
 
-
 export default function FortuneWealthQuestion() {
+  const { user } = useAuth(); // 追加
   const [step, setStep] = useState(0);
   const [form, setForm] = useState({
     nickname: "",
@@ -222,7 +223,36 @@ export default function FortuneWealthQuestion() {
     answers: []
   });
   const [error, setError] = useState("");
+  const [birthdayDisabled, setBirthdayDisabled] = useState(false); // 追加
   const navigate = useNavigate();
+
+  // 追加: Firestoreから誕生日取得
+  useEffect(() => {
+    const fetchBirthday = async () => {
+      if (user) {
+        const docSnap = await getDoc(doc(db, "users", user.uid));
+        const data = docSnap.data();
+        const birthdayDate = data?.birthday?.toDate ? data.birthday.toDate() : null;
+        if (birthdayDate) {
+          setForm(f => ({
+            ...f,
+            birth: {
+              year: birthdayDate.getFullYear().toString(),
+              month: (birthdayDate.getMonth() + 1).toString(),
+              day: birthdayDate.getDate().toString(),
+            }
+          }));
+          setBirthdayDisabled(true);
+        } else {
+          setBirthdayDisabled(false);
+        }
+      } else {
+        setBirthdayDisabled(false);
+      }
+    };
+    fetchBirthday();
+    // eslint-disable-next-line
+  }, [user]);
 
   const validateProfile = () => {
     if (!form.nickname.trim()) {
@@ -257,6 +287,7 @@ export default function FortuneWealthQuestion() {
                   error={error}
                   validateProfile={validateProfile}
                   setStep={setStep}
+                  birthdayDisabled={birthdayDisabled} // 追加
                 />
               ) : (
                 <QuestionStep

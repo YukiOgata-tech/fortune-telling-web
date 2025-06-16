@@ -1,14 +1,45 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createDailyFortune } from "@/utils/fortuneGenerator";
 import { Star, Calendar, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { useAuth } from "@/components/features/AuthContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+
+
 const DailyFortunePage = () => {
+  const { user } = useAuth(); // 追加
   const [birthday,setBirthday] = useState("");
   const [gender,setGender] = useState("F");
   const [result,setResult] = useState(null);
   const [shared,setShared] = useState(false);
+  const [birthdayDisabled, setBirthdayDisabled] = useState(false);
+
+  // --- 追加: Firestoreから誕生日を取得 ---
+  useEffect(() => {
+    const fetchBirthday = async () => {
+      if (user) {
+        const docSnap = await getDoc(doc(db, "users", user.uid));
+        const data = docSnap.data();
+        const birthdayDate = data?.birthday?.toDate ? data.birthday.toDate() : null;
+        const yyyyMMdd = birthdayDate ? birthdayDate.toISOString().slice(0, 10) : "";
+        if (yyyyMMdd) {
+          setBirthday(yyyyMMdd);
+          setBirthdayDisabled(true);
+        } else {
+          setBirthday("");
+          setBirthdayDisabled(false);
+        }
+      } else {
+        setBirthday("");
+        setBirthdayDisabled(false);
+      }
+    };
+    fetchBirthday();
+  }, [user]);
+
 
   const handleSubmit = e=>{
     e.preventDefault();
@@ -47,7 +78,8 @@ const DailyFortunePage = () => {
             <Calendar className="inline-block w-4 h-4 mr-1 -mt-1"/>誕生日
             <input type="date" required value={birthday}
               onChange={e=>setBirthday(e.target.value)}
-              className="mt-1 w-full rounded-xl bg-white/80 p-2 text-slate-800"/>
+              className="mt-1 w-full rounded-xl bg-white/80 p-2 text-slate-800"
+              disabled={birthdayDisabled} />
           </label>
           <div className="flex justify-between items-center">
             <span className="text-white/90 text-sm">性別</span>

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Sparkles, Menu, Mail, ArrowUpFromLine, LogIn, X,} from "lucide-react";
 // Auth機能
 import { useAuth } from "@/components/features/AuthContext";
+import LoginStatus from "../features/LoginStaus";
 
 // 画像パス: public/images/menu-witch01.png を配置
 const witchImg = "/images/menu-witch01.png";
@@ -68,6 +69,9 @@ const Header = () => {
     <>
       {/* ───── 固定ヘッダー ───── */}
       <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#1e2337] via-[#22243d] to-[#2a2d46] shadow-lg border-b border-[#282b43] backdrop-blur-md">
+
+        <LoginStatus position="center" className="-translate-x-2 md:hidden " />
+
         <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
           {/* ロゴ / タイトル */}
           <div
