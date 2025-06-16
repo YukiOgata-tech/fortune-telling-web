@@ -3,7 +3,7 @@
 import tracery from "tracery-grammar";
 import seedrandom from "seedrandom";
 import { dailyFortuneGrammar } from "@/data/dailyFortuneGrammar";
-import { fortuneAddons } from "@/data/fortuneAddons";
+import { fortuneAddons } from "@/data/wealth-releted/fortuneAddons";
 import { dailyOverallComments } from "@/data/dailyOverallComments";
 
 /* ───────── Lucky Pools ───────── */

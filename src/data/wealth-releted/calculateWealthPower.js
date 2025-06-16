@@ -1,5 +1,5 @@
 import { getResultMessage } from "./resultMessages";
-import { generateWealthAmount } from "./generateWealthAmount";
+import { generateWealthAmount } from "@/data/wealth-releted/generateWealthAmount"
 
 export function calcWealthPower(answers) {
   // 各選択肢→点数変換

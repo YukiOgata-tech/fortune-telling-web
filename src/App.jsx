@@ -22,6 +22,7 @@ import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
 import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
 import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
+import ReincarnationPage from "@/pages/ReincarnationPage";
 
 
 function App() {
@@ -69,6 +70,8 @@ function App() {
 
           <Route path="/tarashido" element={<TarashidoDiagnosePage />} />
           <Route path="/tarashido/result" element={<TarashidoResultPage />} />
+
+          <Route path="/reincarnation" element={<ReincarnationPage />} />
 
 
         </Routes>

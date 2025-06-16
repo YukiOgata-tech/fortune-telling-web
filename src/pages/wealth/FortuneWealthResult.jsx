@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import MoneyGlitchEffect from "@/components/MoneyGlitchEffect";
 import ShareButtons from "@/components/ShareButtons";
-import { getWealthResult } from "@/data/calculateWealthPower";
+import { getWealthResult } from "@/data/wealth-releted/calculateWealthPower";
 
 export default function FortuneWealthResult() {
   // 仮: ローカルストレージからデータ取得
