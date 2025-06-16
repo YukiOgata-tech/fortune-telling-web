@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 const DailyFortuneCTA = ({ className = "" }) => {
   return (
     <motion.section
-      className={`relative mx-auto lg:w-[800px] md:w-[600px] w-[400px] bg-white/10 rounded-3xl shadow-xl p-8 flex flex-col md:flex-row items-center gap-4 md:gap-10 ${className}`}
+      className={`relative w-full max-w-2xl mx-auto  bg-white/10 rounded-3xl shadow-xl p-8 flex flex-col md:flex-row items-center gap-4 md:gap-10 ${className}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

@@ -8,7 +8,7 @@ const WealthFortuneCTA = ({ className = "" }) => {
   return (
     <motion.section
       className={`
-        relative mx-auto lg:w-[800px] md:w-[600px] w-[400px] rounded-3xl shadow-xl overflow-hidden
+        relative w-full max-w-2xl mx-auto  rounded-3xl shadow-xl overflow-hidden
         p-8 flex flex-col md:flex-row items-center gap-4 md:gap-10
         ${className}
       `}
