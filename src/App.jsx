@@ -1,22 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import './App.css';
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
-import Background3DSpace from "@/components/common/Background3DSpace";
-import ScrollToTop from "@/components/ScrollToTop";
+import Header from "@/components/general/Header";
+import Footer from "@/components/general/Footer";
+import Background3DSpace from "@/components/general/Background3DSpace";
+import ScrollToTop from "@/components/general/ScrollToTop";
 import RequireAuth from "@/components/features/RequireAuth";
-import SpaceLoading from "@/components/common/SpaceLoader";
-import SvgSprite from "@/components/common/SvgSprite";
+import SpaceLoading from "@/components/general/SpaceLoader";
+import SvgSprite from "@/components/general/SvgSprite";
 // pages import
 import DiagnosePage from "@/pages/DiagnosePage";
 import QuestionnairePage from "@/pages/QuestionnairePage";
 import ResultPage from "@/pages/ResultPage";
-import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import ContactPage from "@/pages/ContactPage";
+import PrivacyPolicy from "@/pages/else/PrivacyPolicy";
+import ContactPage from "@/pages/else/ContactPage";
 import DailyFortunePage from "@/pages/DailyFortunePage";
-import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/AuthPages";
-import { DashboardPage, VerifyEmailPage} from "@/pages/AccountPages";
+import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/else/AuthPages";
+import { DashboardPage, VerifyEmailPage} from "@/pages/else/AccountPages";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
@@ -48,7 +48,7 @@ function App() {
     <div className="min-h-screen min-w-screen flex flex-col">
       <ScrollToTop />
       <Header />
-      <main className="flex-1">
+      <main className="">
         <Background3DSpace />
         <Routes>
           <Route path="/" element={<DiagnosePage />} />

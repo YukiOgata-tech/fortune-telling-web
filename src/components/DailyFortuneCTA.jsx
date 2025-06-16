@@ -19,6 +19,15 @@ const DailyFortuneCTA = ({ className = "" }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6, type: "spring" }}
     >
+      {/* 背景画像レイヤー */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
+        style={{
+          backgroundImage: "url('/images/bg-daily-cta.png')",
+          filter: "brightness(0.92) blur(0px)",
+        }}
+        aria-hidden="true"
+      />
       {/* アイコン + テキスト */}
       <div className="flex items-start gap-4 flex-1 text-center md:text-left">
         <CalendarCheck2 className="md:w-10 md:h-10 w-8 h-8 text-fuchsia-400 shrink-0" />

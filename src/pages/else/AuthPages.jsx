@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/components/features/AuthContext";
 import LoginStatus from "@/components/features/LoginStaus";
 import { SwitchAccountButton, LogoutButton } from "@/components/features/AccountActionButtons";
-import LoginBenefits from "@/components/LoginBenefits";
+import LoginBenefits from "@/components/general/LoginBenefits";
 
 /* ---------- Helper Layout with animation ---------- */
 const AuthLayout = ({ title, children }) => (

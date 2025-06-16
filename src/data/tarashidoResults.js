@@ -6,7 +6,7 @@ const tarashidoResults = [
     type: "陰GOD",
     badge: "Moon",
     comment: "自覚済みの”孤独モノ”あなたを気に掛けてくれる人、、いる？？",
-    image: null
+    image: "/images/tarashido/inGod2.png"
   },
   {
     min: 10,
@@ -14,7 +14,7 @@ const tarashidoResults = [
     type: "スーパー陰キャ",
     badge: "Moon",
     comment: "孤高の陰キャ。自分と深く向き合える力は、実は大きな武器！",
-    image: null,
+    image: "/images/tarashido/inGod.png",
   },
   {
     min: 20,
@@ -22,7 +22,7 @@ const tarashidoResults = [
     type: "陰キャ",
     badge: "Ghost",
     comment: "人見知りだけど、打ち解けた人には本音で話せるタイプ。マイペースさも魅力。",
-    image: null,
+    image: "/images/tarashido/inkya1.png",
   },
   {
     min: 30,
@@ -30,7 +30,7 @@ const tarashidoResults = [
     type: "まああんたは陰キャや",
     badge: "Ghost",
     comment: "慎重派だけど、実は仲良くなった人には超おしゃべり。ギャップで人気出るかも？",
-    image: null,
+    image: "/images/tarashido/inkya2.png",
   },
   {
     min: 40,
@@ -38,7 +38,7 @@ const tarashidoResults = [
     type: "ピュア型人間",
     badge: "Sparkle",
     comment: "素直でピュア。天然の癒し系！無理せずそのままの自分でOK。",
-    image: null,
+    image: "/images/tarashido/pure.png",
   },
   {
     min: 50,
@@ -46,7 +46,7 @@ const tarashidoResults = [
     type: "ピュアを装えるタラシ人間",
     badge: "Sparkle",
     comment: "どこか抜けてる可愛さと安心感で周囲を和ませる“癒しキャラ”、、、を装えてる。",
-    image: null,
+    image: "/images/tarashido/pure-or-what.png",
   },
   {
     min: 60,
@@ -54,7 +54,7 @@ const tarashidoResults = [
     type: "紳士型",
     badge: "Gem",
     comment: "誠実で思いやりがあり、気配り力も抜群。誰からも信頼される“紳士/淑女タイプ”。ただここぞというときに、相手を気にしてスイッチをONにしきれない。でもそれが世の中のバランスを保っているよ。ありがとう☺",
-    image: null,
+    image: "/images/tarashido/gentle.png",
   },
   {
     min: 70,
@@ -62,7 +62,7 @@ const tarashidoResults = [
     type: "人たらし",
     badge: "HeartHandshake",
     comment: "天性の人たらし！無意識に人を惹きつけ、誰とでもすぐ仲良くなれる“愛され体質”。",
-    image: null,
+    image: "/images/tarashido/tarashi.png",
   },
   {
     min: 80,
@@ -70,7 +70,7 @@ const tarashidoResults = [
     type: "陽キャ",
     badge: "Sun",
     comment: "盛り上げ上手なムードメーカー！場を明るくする力はピカイチ。",
-    image: null,
+    image: "/images/tarashido/youkya1.png",
   },
   {
     min: 90,
@@ -78,7 +78,7 @@ const tarashidoResults = [
     type: "スーパー陽キャ",
     badge: "SunMedium",
     comment: "超絶パリピ！どんな空間でも主役になれる“伝説の陽キャ”。陰キャも盛り上げちゃうあなたは社会のHERO！！",
-    image: null,
+    image: "/images/tarashido/youkya2.png",
   },
   {
     min: 100,
@@ -86,7 +86,7 @@ const tarashidoResults = [
     type: "陽キャ界の太陽☼",
     badge: "SunMedium",
     comment: "伝説の太陽！今後あなたが何をしても周りは、眩しくて付いてくることは不可能。少しでも光の放出を抑える必要があります。",
-    image: null,
+    image: "/images/tarashido/youkyaGod.png",
   },
 ];
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fortuneTypes } from "@/data/fortuneTypes";
-import { fortuneDetails } from "@/data/fortuneDetails";
-import { fortuneAdvice } from "@/data/fortuneAdvice2025";
+import { fortuneTypes } from "@/data/main-content/fortuneTypes";
+import { fortuneDetails } from "@/data/main-content/fortuneDetails";
+import { fortuneAdvice } from "@/data/main-content/fortuneAdvice2025";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 // components import

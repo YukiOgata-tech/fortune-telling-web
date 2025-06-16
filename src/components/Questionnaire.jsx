@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { questions } from "@/data/questions";
-import { fortuneTypes } from "@/data/fortuneTypes";
+import { questions } from "@/data/main-content/questions";
+import { fortuneTypes } from "@/data/main-content/fortuneTypes";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
 

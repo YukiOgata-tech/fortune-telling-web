@@ -2,9 +2,9 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import animationData from "@/assets/boy-running.json";
-import AnimationForCard from "@/components/common/AnimationForCard";
+import AnimationForCard from "@/components/general/AnimationForCard";
 // import AnimationComponent from '@/components/AnimationComponent';
-import VideoComponent from "@/components/VideoComponent";
+import VideoComponent from "@/components/general/WebmComponent";
 
 export default function FortuneWealthHome() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import lottie from 'lottie-web';
 // エクスポートされているものをすべてインポート
-import * as animationData from '@/assets/yuki-02.json';
+import animationData from '';
 
 const AnimationComponent = () => {
   const containerRef = useRef(null);

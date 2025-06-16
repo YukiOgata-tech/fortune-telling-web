@@ -7,7 +7,7 @@ export default function ResultPage({ result, onRestart }) {
   return (
     <div className="
       min-h-[480px] w-full rounded-3xl shadow-2xl flex flex-col items-center justify-center py-10
-      bg-gradient-to-br from-blue-950/90 via-fuchsia-800/70 to-slate-950/90
+      bg-gradient-to-br from-blue-950/90 via-fuchsia-800/50 to-slate-950/60
       ring-2 ring-fuchsia-400/40 ring-offset-2
     ">
       {/* タイトル・アイコン */}

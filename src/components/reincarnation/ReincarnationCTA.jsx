@@ -27,11 +27,11 @@ const ReincarnationCTA = ({ className = "" }) => {
         <div className="space-y-2">
           <h2 className="text-2xl font-extrabold tracking-tight text-white drop-shadow">
             <span className="text-3xl text-fuchsia-200">前世診断</span>で<br className="md:hidden" />
-            本当の自分を探そう
+            真の自分を探そう
           </h2>
           <p className="text-white/90 leading-relaxed drop-shadow">
-            あなたの前世は偉人？動物？それとも伝説のキャラか…？<br />
-            質問に答えるだけで、100種超の中からピッタリな“前世”タイプが判明！<br />
+            あなたの前世は偉人？動物？それとも伝説の…？<br />
+            質問に答えるだけで、100種超の中から“前世”が判明！<br />
             あなたの新しい一面、のぞいてみませんか？
           </p>
         </div>

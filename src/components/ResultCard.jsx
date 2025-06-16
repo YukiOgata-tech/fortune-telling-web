@@ -1,6 +1,6 @@
 import * as Icons from "lucide-react";
 // fortuneTypes の中に imageUrl（背景画像）を持つ想定です
-import { fortuneTypes } from "@/data/fortuneTypes";
+import { fortuneTypes } from "@/data/main-content/fortuneTypes";
 
 const ResultCard = ({ typeId, className = "" }) => {
   const type = fortuneTypes.find((t) => t.id === typeId);

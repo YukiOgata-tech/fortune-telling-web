@@ -49,7 +49,7 @@ export default function ReincarnationPage() {
 
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-950/10 via-fuchsia-900/20 to-indigo-950/10 p-6 flex flex-col items-center justify-center">
+    <div className="min-h-screen w-full p-6 flex flex-col items-center justify-center">
       <AnimatePresence mode="wait">
         <div className="w-full max-w-2xl mx-auto">
           {/* 説明テキスト（プログレスバーの上） */}

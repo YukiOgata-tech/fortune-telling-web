@@ -22,9 +22,13 @@ const TarashidoCTA = ({ className = "" }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6, type: "spring" }}
     >
-      {/* 背景装飾レイヤー */}
+      {/* 背景画像レイヤー */}
       <div
-        className="absolute inset-0 z-0 bg-gradient-to-br from-pink-400/30 via-indigo-400/20 to-blue-400/20 opacity-50"
+        className="absolute inset-0 z-0 bg-cover bg-bottom md:bg-center opacity-30"
+        style={{
+          backgroundImage: "url('/images/bg-tarashido-cta.png')",
+          filter: "brightness(0.92) blur(0px)",
+        }}
         aria-hidden="true"
       />
       {/* メイン内容 */}
@@ -32,12 +36,12 @@ const TarashidoCTA = ({ className = "" }) => {
         <HeartHandshake className="md:w-10 md:h-10 w-8 h-8 text-pink-400 shrink-0 animate-pulse" />
         <div className="space-y-2">
           <h2 className="text-2xl font-extrabold tracking-tight text-white drop-shadow">
-            <span className="text-3xl text-blue-200">人たらし度診断</span>で自分の“コミュ力”を測ろう
+            <span className="text-3xl text-blue-200">人たらし度診断</span>で“コミュ力”を測ろう
           </h2>
           <p className="text-white/90 leading-relaxed drop-shadow">
-            あなたはスーパー陽キャ？紳士型？それともピュア陰キャ…？<br />
-            12問に答えるだけで、話題性バツグンの“人たらし度”がまるわかり！<br />
-            ネタにも本気にもなる、友達ともシェアしたくなる自己診断をぜひお試しください。
+            スーパー陽キャ？紳士型？それとも陰キャ…？<br />
+            12問に答えるだけで、話題性バツグンの“人たらし度”がまるわかり！
+            ネタにも本気にもなる、友達ともシェアしたくなる自己診断をぜひ。
           </p>
         </div>
       </div>

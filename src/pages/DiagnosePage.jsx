@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 // コンポーネントをimport
-import StaticNoise from "@/components/StaticNoise";
-import ElectricSpark from "@/components/ElectricSpark";
+import StaticNoise from "@/components/general/StaticNoise";
+import ElectricSpark from "@/components/general/ElectricSpark";
 import DailyFortuneCTA from "@/components/DailyFortuneCTA";
 import WealthFortuneCTA from "@/components/wealth/WealthFortuneCTA";
 import TarashidoCTA from "@/components/tarashido/TarashidoCTA";

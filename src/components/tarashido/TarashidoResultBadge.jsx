@@ -13,7 +13,7 @@ const iconMap = {
 const TarashidoResultBadge = ({ type, badge, image }) => (
   <div className="flex flex-col items-center">
     {image ? (
-      <img src={image} alt={type} className="w-32 h-32 rounded-2xl mb-2 shadow-lg" />
+      <img src={image} alt={type} className="w-36 h-auto absolute right-2 top-4 rounded-xl mb-2 shadow-lg -z-1" />
     ) : (
       iconMap[badge] || null
     )}
