@@ -21,7 +21,7 @@ const WealthFortuneCTA = ({ className = "" }) => {
       <div
         className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
         style={{
-          backgroundImage: "url('/images/bg-wealth-cta.png')",
+          backgroundImage: "url('/images/CTAs/bg-wealth-cta.png')",
           filter: "brightness(0.92) blur(0px)",
         }}
         aria-hidden="true"

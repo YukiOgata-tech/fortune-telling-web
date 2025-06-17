@@ -17,12 +17,14 @@ import ContactPage from "@/pages/else/ContactPage";
 import DailyFortunePage from "@/pages/DailyFortunePage";
 import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/else/AuthPages";
 import { DashboardPage, VerifyEmailPage} from "@/pages/else/AccountPages";
+import AboutMe from "@/pages/AboutMePage";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
 import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
 import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
 import ReincarnationPage from "@/pages/ReincarnationPage";
+import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
 
 
 function App() {
@@ -56,6 +58,8 @@ function App() {
           <Route path="/result" element={<ResultPage />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about-me" element={<AboutMe/>}/>
+
           <Route path="/daily" element={<DailyFortunePage />} />
           <Route path="/login/to/neo-oracle" element={<LoginPage/>}/>
           <Route path="/register" element={<RegisterPage />} />
@@ -72,6 +76,7 @@ function App() {
           <Route path="/tarashido/result" element={<TarashidoResultPage />} />
 
           <Route path="/reincarnation" element={<ReincarnationPage />} />
+          <Route path="/soul-number" element={<SoulNumberDiagnoser />} />
 
 
         </Routes>

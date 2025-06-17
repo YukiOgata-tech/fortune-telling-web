@@ -2,13 +2,7 @@ import { Link } from "react-router-dom";
 import { CalendarCheck2 } from "lucide-react";
 import { motion } from "framer-motion";
 
-/*
-  DailyFortuneCTA ― トップページに挿入する案内コンポーネント。
-  - 落ち着いた導入文でユーザーの興味を喚起
-  - /daily へのリンクボタン
-  - Tailwind でレスポンシブ対応（縦→横レイアウト）
-  - さりげないアニメーションで注目を集める
-*/
+
 
 const DailyFortuneCTA = ({ className = "" }) => {
   return (
@@ -23,7 +17,7 @@ const DailyFortuneCTA = ({ className = "" }) => {
       <div
         className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
         style={{
-          backgroundImage: "url('/images/bg-daily-cta.png')",
+          backgroundImage: "url('/images/CTAs/bg-daily-cta.png')",
           filter: "brightness(0.92) blur(0px)",
         }}
         aria-hidden="true"
@@ -44,7 +38,7 @@ const DailyFortuneCTA = ({ className = "" }) => {
       </div>
 
       {/* 行動ボタン */}
-      <Link to="/daily" className="w-full md:w-auto">
+      <Link to="/daily" className="w-full md:w-auto relative z-10">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}

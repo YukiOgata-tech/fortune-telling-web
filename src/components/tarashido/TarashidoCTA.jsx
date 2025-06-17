@@ -26,7 +26,7 @@ const TarashidoCTA = ({ className = "" }) => {
       <div
         className="absolute inset-0 z-0 bg-cover bg-bottom md:bg-center opacity-30"
         style={{
-          backgroundImage: "url('/images/bg-tarashido-cta.png')",
+          backgroundImage: "url('/images/CTAs/bg-tarashido-cta.png')",
           filter: "brightness(0.92) blur(0px)",
         }}
         aria-hidden="true"

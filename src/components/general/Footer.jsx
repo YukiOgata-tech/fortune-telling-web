@@ -6,7 +6,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-gradient-to-r from-[#23243a] via-[#191a27] to-[#2a2d46] border-t border-[#282b43] pt-7 pb-4 px-4 md:px-0 mt-12">
+    <footer className="w-full bg-gradient-to-r from-[#23243a] via-[#191a27] to-[#2a2d46] border-t border-[#282b43] pt-7 pb-6 px-4 md:px-0 mt-12">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-end justify-between gap-8">
         {/* サイト情報 */}
         <div className="flex flex-col items-center md:items-start">
@@ -17,6 +17,12 @@ const Footer = () => {
         </div>
         {/* メニューリンク */}
         <nav className="flex items-center gap-5 mb-2 md:mb-0">
+          <button
+            className="text-[#a6f2fd] hover:text-[#f7ceff] transition text-sm font-semibold"
+            onClick={() => navigate("/about-me")}
+          >
+            サイトについて
+          </button>
           <button
             className="text-[#9ad0e5] hover:text-[#f7ceff] transition text-sm font-semibold"
             onClick={() => navigate("/privacypolicy")}

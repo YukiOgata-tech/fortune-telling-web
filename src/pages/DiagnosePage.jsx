@@ -7,6 +7,7 @@ import DailyFortuneCTA from "@/components/DailyFortuneCTA";
 import WealthFortuneCTA from "@/components/wealth/WealthFortuneCTA";
 import TarashidoCTA from "@/components/tarashido/TarashidoCTA";
 import ReincarnationCTA from "@/components/reincarnation/ReincarnationCTA";
+import SoulNumberCTA from "@/components/SoulNumberCTA";
 
 
 /** --------------------------------------------------
@@ -118,6 +119,7 @@ const DiagnosePage = () => {
       <WealthFortuneCTA className="mb-4"/>
       <TarashidoCTA className="mb-4" />
       <ReincarnationCTA className="mb-4" />
+      <SoulNumberCTA className="mb-4" />
       </div>
     </div>
   );

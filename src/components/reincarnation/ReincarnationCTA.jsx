@@ -18,7 +18,16 @@ const ReincarnationCTA = ({ className = "" }) => {
     >
       {/* 軽い星空レイヤー */}
       <div
-        className="absolute inset-0 z-0 bg-gradient-to-br from-indigo-900/60 via-fuchsia-600/40 to-blue-700/50 opacity-60"
+        className="absolute inset-0 z-0 bg-gradient-to-br from-indigo-900/30 via-fuchsia-600/20 to-blue-700/10 opacity-60"
+        aria-hidden="true"
+      />
+      {/* 背景画像レイヤー */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-30"
+        style={{
+          backgroundImage: "url('/images/CTAs/bg-reincarnation-cta.png')",
+          filter: "brightness(0.92) blur(0px)",
+        }}
         aria-hidden="true"
       />
       {/* 内容 */}
