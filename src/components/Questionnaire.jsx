@@ -66,7 +66,7 @@ const Questionnaire = () => {
 
     return (
       // 画面全体の未来感グラデ背景
-      <div className="min-h-[60%] flex items-center justify-center bg-fuchsia-200/0 transition-colors duration-400 p-1">
+      <div className="min-h-screen flex items-center justify-center bg-fuchsia-200/0 transition-colors duration-400 p-1">
         {/* ガラス風のメインカード */}
         <motion.div
           className="max-w-xl w-full p-8 rounded-3xl bg-white/40 shadow-[0_8px_32px_0_rgba(63,56,175,0.3)] border border-fuchsia-400/40 backdrop-blur-2xl relative"

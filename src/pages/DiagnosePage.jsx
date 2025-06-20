@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 // コンポーネントをimport
 import StaticNoise from "@/components/general/StaticNoise";
 import ElectricSpark from "@/components/general/ElectricSpark";
@@ -8,13 +9,12 @@ import WealthFortuneCTA from "@/components/wealth/WealthFortuneCTA";
 import TarashidoCTA from "@/components/tarashido/TarashidoCTA";
 import ReincarnationCTA from "@/components/reincarnation/ReincarnationCTA";
 import SoulNumberCTA from "@/components/SoulNumberCTA";
+// hooks import
+import useScrollDepth from "@/hooks/useScrollDepth";
+import useGtagEvent from "@/hooks/useGtagEvent";
 
 
-/** --------------------------------------------------
- *  ヒーローセクション用 HUD フレーム
- *  - 中央に診断メイン画像を表示（public/images/hero/diagnose-hero.jpg）
- *  - テレビのノイズ & グリッチエフェクトを CSS keyframes で実装
- * -------------------------------------------------- */
+
 
 /** 200 文字のサマリー */
 const summary =
@@ -84,6 +84,8 @@ const AnimatedWord = ({ children }) => (
 
 const DiagnosePage = () => {
   const navigate = useNavigate();
+  useScrollDepth("DiagnosePage"); //スクロール 計測
+  const sendGtagEvent = useGtagEvent(); // ボタンクリックイベント
 
   return (
     <div className="bg-gray-100/0 text-white min-h-screen flex flex-col">
@@ -106,7 +108,13 @@ const DiagnosePage = () => {
         {/* スタートボタン */}
         <div className="flex justify-center pt-8">
           <button
-            onClick={() => navigate("/questionnaire")}
+            onClick={() => {
+              sendGtagEvent('click_start_diagnose', {
+              event_category: 'CTA',
+              event_label: 'DiagnosePage: Start',
+            });
+            navigate("/questionnaire");
+            }}
             className="relative px-12 py-4 font-semibold text-lg text-white rounded-full overflow-hidden bg-indigo-600 hover:bg-indigo-500 transition-transform active:scale-95 shadow-lg"
           >
             <span className="relative z-10">診断をスタート</span>

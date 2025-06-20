@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import useScrollDepth from "@/hooks/useScrollDepth";
 
 export default function AboutMe() {
+  useScrollDepth("AboutMePage");
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-start py-12 px-2">
       <div className="w-full max-w-2xl mx-auto flex flex-col gap-8 items-center">

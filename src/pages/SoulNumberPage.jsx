@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SOUL_NUMBERS } from "@/data/soulNumbers";
 import CalculationAnimation from "@/components/SoulCalculationAnimation";
+// import { Calendar } from "lucide-react";
 
-// 🔒 Auth & Firestore
+//  Auth & Firestore
 import { useAuth } from "@/components/features/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -91,6 +92,8 @@ export default function SoulNumberPage() {
         <Card className="relative w-full max-w-md bg-gradient-to-br from-[#1a1a2e]/90 via-[#23233a]/85 to-[#222e3c]/90 backdrop-blur-xl border-2 border-cyan-400/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] rounded-3xl overflow-hidden before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_40%_10%,rgba(34,211,238,0.18)_0%,rgba(139,92,246,0.07)_100%)] before:opacity-30 before:blur-sm before:pointer-events-none">
           <CardContent className="flex flex-col gap-6 p-8 z-10">
             <h1 className="text-2xl font-semibold text-center text-white biz-udpmincho-regular">SOUL NUMBER 診断</h1>
+            <label className="block text-white text-sm font-medium mb-1"></label>
+            <span className="text-white ">--誕生日入力--</span>
             <input
               type="date"
               value={date}
@@ -98,6 +101,7 @@ export default function SoulNumberPage() {
               disabled={birthdayDisabled}
               className="w-full px-4 py-2 rounded-xl text-slate-300 bg-white/10 focus:outline-none border-amber-200 border-1"
             />
+            <label/>
             <Button
               disabled={!date}
               onClick={startAnimation}

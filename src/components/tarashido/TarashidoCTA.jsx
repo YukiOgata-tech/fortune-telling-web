@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import { HeartHandshake } from "lucide-react";
 import { motion } from "framer-motion";
+import useGtagEvent from "@/hooks/useGtagEvent";
 
-/*
-  TarashidoCTA ― トップページなどに挿入する案内コンポーネント。
-  - キャッチーな導入文
-  - /tarashido へのリンクボタン
-  - Tailwind & FramerMotionでレスポンシブ＆アニメ
-*/
+
 
 const TarashidoCTA = ({ className = "" }) => {
+  const sendGtagEvent = useGtagEvent();
+
   return (
     <motion.section
       className={`
@@ -51,6 +49,12 @@ const TarashidoCTA = ({ className = "" }) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
           className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-400 via-pink-400 to-fuchsia-500 text-white font-semibold shadow-md"
+          onClick={() => {
+            sendGtagEvent('click_tarashido', {
+            event_category: 'CTA',
+            event_label: 'TarashidoCTA',
+            });
+          }}
         >
           人たらし度を診断する
         </motion.button>

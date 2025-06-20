@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { Baby } from "lucide-react";
 import { motion } from "framer-motion";
+import useGtagEvent from "@/hooks/useGtagEvent";
 
 
 const ReincarnationCTA = ({ className = "" }) => {
+  const sendGtagEvent = useGtagEvent();
+
   return (
     <motion.section
       className={`
@@ -51,6 +54,12 @@ const ReincarnationCTA = ({ className = "" }) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
           className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-fuchsia-500 to-indigo-500 text-white font-semibold shadow-md"
+          onClick={() => {
+            sendGtagEvent('click_reincarnation', {
+            event_category: 'CTA',
+            event_label: 'ReincarnationCTA',
+            });
+          }}
         >
           前世を診断する
         </motion.button>

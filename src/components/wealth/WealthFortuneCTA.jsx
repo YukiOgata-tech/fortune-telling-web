@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { Gem } from "lucide-react";
 import { motion } from "framer-motion";
+import useGtagEvent from "@/hooks/useGtagEvent";
 
 
 
 const WealthFortuneCTA = ({ className = "" }) => {
+  const sendGtagEvent = useGtagEvent();
+
   return (
     <motion.section
       className={`
@@ -46,6 +49,12 @@ const WealthFortuneCTA = ({ className = "" }) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
           className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-amber-500 text-yellow-900 font-semibold shadow-md"
+          onClick={() => {
+            sendGtagEvent('click_wealth_fortune', {
+            event_category: 'CTA',
+            event_label: 'WealthFortuneCTA',
+            });
+          }}
         >
           生涯年収を診断する
         </motion.button>

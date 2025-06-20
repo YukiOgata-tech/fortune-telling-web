@@ -58,7 +58,7 @@ function App() {
           <Route path="/result" element={<ResultPage />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/about-me" element={<AboutMe/>}/>
+          <Route path="/about-me" element={<AboutMe/>} />
 
           <Route path="/daily" element={<DailyFortunePage />} />
           <Route path="/login/to/neo-oracle" element={<LoginPage/>}/>
