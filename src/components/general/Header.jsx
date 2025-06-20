@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Sparkles, Menu, Mail, ArrowUpFromLine, LogIn, X,} from "lucide-react";
+import { Sparkles, Menu, Mail, ArrowUpFromLine, LogIn, X, HelpCircle, MoreHorizontal } from "lucide-react";
 // Auth機能
 import { useAuth } from "@/components/features/AuthContext";
 import LoginStatus from "../features/LoginStaus";
 
-// 画像パス: public/images/menu-witch01.png を配置
 const witchImg = "/images/menu-witch01.png";
 
 // ヘッダー用ログインステータス（クリックで任意ページ遷移）
@@ -30,11 +29,13 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const { user } = useAuth();
 
   // ページ遷移時にドロワーを閉じる
   useEffect(() => {
     setOpen(false);
+    setMoreOpen(false);
   }, [location.pathname]);
 
   // ドロワー開閉でスクロール制御
@@ -53,6 +54,67 @@ const Header = () => {
     }
   };
 
+  // PC用のメニュー
+  const PcMenu = () => (
+    <nav className="hidden md:flex items-center gap-4 ml-auto">
+      {/* 左端 トップへ */}
+      <button
+        className="flex items-center gap-1 px-3 py-2 text-[#f5efff] hover:text-[#ffd6fb] rounded-xl font-bold bg-gradient-to-br from-[#2d3146]/70 to-[#2c2844]/40"
+        onClick={scrollToTop}
+        title="ページトップへ"
+      >
+        <ArrowUpFromLine size={20} />
+        トップへ
+      </button>
+
+      {/* 中央 ログイン系 */}
+      <div>
+        {!user ? (
+          <button
+            onClick={() => navigate("/login/to/neo-oracle")}
+            className="flex items-center gap-1 px-3 py-2 text-[#f5efff] hover:text-[#ffd6fb] rounded-xl font-bold bg-gradient-to-br from-[#46426b]/50 to-[#2c2844]/50"
+          >
+            <LogIn size={18} />
+            ログイン
+          </button>
+        ) : (
+          <LoginStatusButton onClick={() => navigate("/login/to/neo-oracle")} />
+        )}
+      </div>
+
+      {/* 右端 その他（ドロップダウン） */}
+      <div className="relative">
+        <button
+          onClick={() => setMoreOpen((v) => !v)}
+          className="flex items-center gap-1 px-3 py-2 text-[#f5efff] hover:text-[#ffd6fb] rounded-xl font-bold bg-gradient-to-br from-[#2d3146]/70 to-[#2c2844]/40"
+        >
+          <MoreHorizontal size={22} />
+          
+        </button>
+        {moreOpen && (
+          <div
+            className="absolute right-0 mt-2 w-48 bg-[#24253a] rounded-xl shadow-lg py-2 border border-[#3a3a5c] z-50 animate-fadeIn"
+            onMouseLeave={() => setMoreOpen(false)}
+          >
+            <button
+              className="w-full flex items-center gap-2 px-4 py-2 text-slate-200 hover:bg-[#383a57] transition"
+              onClick={() => { setMoreOpen(false); navigate("/contact"); }}
+            >
+              <Mail size={18} /> お問い合わせ
+            </button>
+            <button
+              className="w-full flex items-center gap-2 px-4 py-2 text-slate-200 hover:bg-[#383a57] transition"
+              onClick={() => { setMoreOpen(false); navigate("/faq"); }}
+            >
+              <HelpCircle size={18} /> FAQ
+            </button>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+
+
   // 共通ボタン
   const NavButton = ({ icon: Icon, label, onClick, title }) => (
     <button
@@ -69,7 +131,6 @@ const Header = () => {
     <>
       {/* ───── 固定ヘッダー ───── */}
       <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#1e2337] via-[#22243d] to-[#2a2d46] shadow-lg border-b border-[#282b43] backdrop-blur-md">
-
         <LoginStatus position="center" className="-translate-x-2 md:hidden " />
 
         <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
@@ -82,21 +143,15 @@ const Header = () => {
               size={28}
               className="text-[#88f7ea] drop-shadow-glow group-hover:rotate-6 transition-transform"
             />
-            <span className="text-xl md:text-2xl font-extrabold tracking-wide text-[#f5efff] drop-shadow-xl font-mono group-hover:text-[#c2a9fa] transition-colors">
+            <span className="text-xl md:text-2xl font-extrabold tracking-wide text-[#f5efff] drop-shadow-xl font-mono group-hover:text-[#c2a9fa] transition-colors biz-udpmincho-regular">
               占いみたいな性格診断
             </span>
           </div>
 
-          {/* デスクトップナビ */}
-          <nav className="hidden md:flex items-center gap-5">
-            <NavButton icon={Mail} label="お問い合わせ" onClick={() => navigate("/contact")} title="お問い合わせページへ" />
-            <NavButton icon={ArrowUpFromLine} label="トップ" onClick={scrollToTop} title="ページトップへ" />
-            {!user ? (
-              <NavButton icon={LogIn} label="ログイン" onClick={() => navigate("/login/to/neo-oracle")} />
-            ) : (
-              <LoginStatusButton onClick={() => navigate("/login/to/neo-oracle")} />
-            )}
-          </nav>
+          {/* PC専用メニュー */}
+          <div className="flex-1 hidden md:flex">
+            <PcMenu />
+          </div>
 
           {/* モバイルメニュー開く */}
           <button
@@ -134,6 +189,8 @@ const Header = () => {
         <nav className="flex flex-col gap-6 px-6 py-6">
           <NavButton icon={Mail} label="お問い合わせ" onClick={() => navigate("/contact")} title="お問い合わせページへ" />
           <NavButton icon={ArrowUpFromLine} label="トップ" onClick={scrollToTop} />
+          <NavButton icon={HelpCircle} label="よくある質問" onClick={() => navigate("/faq")} title="FAQページへ" />
+  
           {!user ? (
             <NavButton icon={LogIn} label="ログイン" onClick={() => navigate("/login/to/neo-oracle")} />
           ) : (

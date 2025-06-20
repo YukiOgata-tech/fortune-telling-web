@@ -9,6 +9,7 @@ import WealthFortuneCTA from "@/components/wealth/WealthFortuneCTA";
 import TarashidoCTA from "@/components/tarashido/TarashidoCTA";
 import ReincarnationCTA from "@/components/reincarnation/ReincarnationCTA";
 import SoulNumberCTA from "@/components/SoulNumberCTA";
+import Seo from "@/components/Seo";
 // hooks import
 import useScrollDepth from "@/hooks/useScrollDepth";
 import useGtagEvent from "@/hooks/useGtagEvent";
@@ -89,6 +90,11 @@ const DiagnosePage = () => {
 
   return (
     <div className="bg-gray-100/0 text-white min-h-screen flex flex-col">
+      <Seo
+        title="占い・性格診断 | Neo-Oracle"
+        description="18タイプの性格診断。質問に答えて潜在的な性格傾向を多角的に可視化。直感・思考・感情から導いた結果を正確に提示します。"
+      />
+
       {/* Hero Screen */}
       <HeroScreen />
 

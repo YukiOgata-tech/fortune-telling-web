@@ -8,6 +8,7 @@ import ScrollToTop from "@/components/general/ScrollToTop";
 import RequireAuth from "@/components/features/RequireAuth";
 import SpaceLoading from "@/components/general/SpaceLoader";
 import SvgSprite from "@/components/general/SvgSprite";
+import Layout from "@/components/Layout";
 // pages import
 import DiagnosePage from "@/pages/DiagnosePage";
 import QuestionnairePage from "@/pages/QuestionnairePage";
@@ -18,6 +19,7 @@ import DailyFortunePage from "@/pages/DailyFortunePage";
 import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/else/AuthPages";
 import { DashboardPage, VerifyEmailPage} from "@/pages/else/AccountPages";
 import AboutMe from "@/pages/AboutMePage";
+import FaqPage from "@/pages/FaqPage";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
@@ -47,6 +49,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Layout>
     <div className="min-h-screen min-w-screen flex flex-col">
       <ScrollToTop />
       <Header />
@@ -59,6 +62,7 @@ function App() {
           <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about-me" element={<AboutMe/>} />
+          <Route path="/faq" element={<FaqPage/>}/>
 
           <Route path="/daily" element={<DailyFortunePage />} />
           <Route path="/login/to/neo-oracle" element={<LoginPage/>}/>
@@ -84,6 +88,7 @@ function App() {
     <Footer/>
     </div>
     <SvgSprite />
+    </Layout>
     </BrowserRouter>
   )
 }
