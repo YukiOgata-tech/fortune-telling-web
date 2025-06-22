@@ -5,6 +5,7 @@ import { Star, Calendar, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { useAuth } from "@/components/features/AuthContext";
+import CommentThread from "@/components/CommentThread";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -173,6 +174,12 @@ const DailyFortunePage = () => {
           )}
         </motion.div>
       )}
+      <CommentThread
+      docPath="diagnoses/dailyFortune/comments"
+      requiredFields={["name", "comment"]}
+      title="毎日占いを共有しよう！"
+      description="今日の運勢について自由にコメントして共有しよう！"
+    />
     </div>
   );
 };

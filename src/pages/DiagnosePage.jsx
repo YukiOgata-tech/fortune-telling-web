@@ -4,11 +4,11 @@ import { useEffect, useRef } from "react";
 // コンポーネントをimport
 import StaticNoise from "@/components/general/StaticNoise";
 import ElectricSpark from "@/components/general/ElectricSpark";
-import DailyFortuneCTA from "@/components/DailyFortuneCTA";
-import WealthFortuneCTA from "@/components/wealth/WealthFortuneCTA";
-import TarashidoCTA from "@/components/tarashido/TarashidoCTA";
-import ReincarnationCTA from "@/components/reincarnation/ReincarnationCTA";
-import SoulNumberCTA from "@/components/SoulNumberCTA";
+import DailyFortuneCTA from "@/components/CTAs/DailyFortuneCTA";
+import WealthFortuneCTA from "@/components/CTAs/WealthFortuneCTA";
+import TarashidoCTA from "@/components/CTAs/TarashidoCTA";
+import ReincarnationCTA from "@/components/CTAs/ReincarnationCTA";
+import SoulNumberCTA from "@/components/CTAs/SoulNumberCTA";
 import Seo from "@/components/Seo";
 // hooks import
 import useScrollDepth from "@/hooks/useScrollDepth";

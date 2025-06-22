@@ -7,7 +7,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 // components import
 import ResultCard from "@/components/ResultCard";
-import DailyFortuneCTA from "@/components/DailyFortuneCTA";
+import DailyFortuneCTA from "@/components/CTAs/DailyFortuneCTA";
 import { useAuth } from "@/components/features/AuthContext";
 
 

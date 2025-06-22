@@ -17,9 +17,9 @@ import PrivacyPolicy from "@/pages/else/PrivacyPolicy";
 import ContactPage from "@/pages/else/ContactPage";
 import DailyFortunePage from "@/pages/DailyFortunePage";
 import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/else/AuthPages";
-import { DashboardPage, VerifyEmailPage} from "@/pages/else/AccountPages";
+import { VerifyEmailPage} from "@/pages/else/AccountPages";
 import AboutMe from "@/pages/AboutMePage";
-import FaqPage from "@/pages/FaqPage";
+import FaqPage from "@/pages/else/FaqPage";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
@@ -27,6 +27,7 @@ import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
 import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
 import ReincarnationPage from "@/pages/ReincarnationPage";
 import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
+import DashboardPage from "@/pages/DashBoardPage";
 
 
 function App() {
