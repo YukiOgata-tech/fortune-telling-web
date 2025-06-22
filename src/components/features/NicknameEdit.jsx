@@ -4,7 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 import { updateProfile } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collectionGroup,
+  where,
+  query,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 const MAX_LENGTH = 16;
@@ -35,13 +43,29 @@ const NicknameEdit = () => {
     }
     setLoading(true);
     try {
-      await updateProfile(user, { displayName: nickname.trim() });
+      const newName = nickname.trim();
+
+      // Firebase Auth プロフィール更新
+      await updateProfile(user, { displayName: newName });
       await user.reload();
 
-      // Firestoreにも反映
-    await setDoc(doc(db, "users", user.uid), {
-      displayName: nickname.trim(),
-    }, { merge: true });
+      // users コレクションのプロフィール更新
+      await setDoc(
+        doc(db, "users", user.uid),
+        { displayName: newName, updatedAt: new Date() },
+        { merge: true }
+      );
+
+      // ② 既存コメントの userName を一括更新
+      const q = query(
+        collectionGroup(db, "comments"),
+        where("userId", "==", user.uid)
+      );
+      const snap = await getDocs(q);
+      // コメント件数が 500 件を超える場合は分割書き込み推奨だが、
+      // 通常規模では逐次 update で十分
+      const promises = snap.docs.map((d) => updateDoc(d.ref, { userName: newName }));
+      await Promise.all(promises);
 
       setMsg("ユーザー名を更新しました！");
       setOpen(false);
