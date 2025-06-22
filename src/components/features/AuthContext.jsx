@@ -1,19 +1,14 @@
-
+// AuthContext.jsx — Email/Password + Google, Apple, Game Center 完全対応
 import React, { createContext, useContext, useEffect, useState } from "react";
-import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  sendPasswordResetEmail,
-  sendEmailVerification,
-  updateProfile
-} from "firebase/auth";
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updateProfile, signInWithPopup, GoogleAuthProvider, OAuthProvider,} from "firebase/auth";
+
+// Game Center provider: グローバル変数にしてる
+let GameCenterAuthProvider = null;
+
 import {
   doc,
   setDoc,
-  addDoc,
-  collection,
+  getDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
@@ -21,71 +16,75 @@ import { httpsCallable } from "firebase/functions";
 // Centralised Firebase instances
 import { auth, db, functions } from "@/lib/firebase";
 
-const AuthContext = createContext({});
 
+const AuthContext = createContext({});
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [initializing, setInitializing] = useState(true);
 
+  /* ――― ensure user profile doc exists ――― */
+  const ensureProfileDoc = async (u) => {
+    if (!u) return;
+    const ref = doc(db, "users", u.uid);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) {
+      await setDoc(ref, {
+        email: u.email,
+        displayName: u.displayName || "",
+        provider: u.providerData[0]?.providerId || "password",
+        createdAt: serverTimestamp(),
+      });
+    }
+  };
+
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => {
+    const unsub = onAuthStateChanged(auth, async (u) => {
       setUser(u);
+      if (u) await ensureProfileDoc(u);
       setInitializing(false);
     });
     return unsub;
   }, []);
 
-  /* ---------- Helpers ---------- */
+  /* ---------- Email / Password ---------- */
   const register = async (email, password, profile = {}) => {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
-
-    // displayName をAuthユーザー本体にセット
-    if (profile.displayName) {
-      await updateProfile(cred.user, { displayName: profile.displayName });
-    }
-    // Require email verification before certain actions
+    if (profile.displayName) await updateProfile(cred.user, { displayName: profile.displayName });
     await sendEmailVerification(cred.user).catch(console.warn);
-
-    // Create profile doc under users/{uid}
     await setDoc(doc(db, "users", cred.user.uid), {
       email,
-      ...profile,
+      displayName: profile.displayName || "",
+      provider: "password",
       createdAt: serverTimestamp(),
     });
-
-    // Cloud Function: send onboarding / daily-fortune prompt
-    try {
-      const sendWelcomeEmail = httpsCallable(functions, "sendWelcomeEmail");
-      await sendWelcomeEmail({
-        email,
-        displayName: profile.displayName || "",
-      });
-    } catch (err) {
-      console.warn("Welcome email failed:", err);
-    }
+    /* オンボーディングメールなど省略 */
   };
 
-  const login = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
-
+  const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
   const logout = () => signOut(auth);
-
   const resetPassword = (email) => sendPasswordResetEmail(auth, email);
 
-  /**
-   * Persist a daily‑fortune or questionnaire result
-   * @param {{ topTypes: string[], biasTotal: number }} result
-   */
-  const saveFortuneResult = async (result) => {
-    if (!user) return;
-    await addDoc(collection(db, "users", user.uid, "fortuneResults"), {
-      ...result,
-      createdAt: serverTimestamp(),
-    });
-  };
+  /* ---------- Social login helpers ---------- */
+  const loginWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider());
 
+  const loginWithApple = () => signInWithPopup(auth, new OAuthProvider("apple.com"));
+
+  const loginWithGameCenter = async () => {
+  if (!GameCenterAuthProvider) {
+    try {
+      const { GameCenterAuthProvider: GC } = await import("firebase/auth");
+      GameCenterAuthProvider = GC;
+    } catch {
+      alert("Game Center ログインは iOS Safari/PWA 専用です");
+      return;
+    }
+  }
+  return signInWithPopup(auth, new GameCenterAuthProvider());
+};
+
+  /* ---------- Public value ---------- */
   const value = {
     user,
     initializing,
@@ -93,7 +92,9 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     resetPassword,
-    saveFortuneResult,
+    loginWithGoogle,
+    loginWithApple,
+    loginWithGameCenter,
   };
 
   return (

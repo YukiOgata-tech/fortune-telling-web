@@ -18,7 +18,7 @@ import ContactPage from "@/pages/else/ContactPage";
 import DailyFortunePage from "@/pages/DailyFortunePage";
 import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/else/AuthPages";
 import { VerifyEmailPage} from "@/pages/else/AccountPages";
-import AboutMe from "@/pages/AboutMePage";
+import AboutMe from "@/pages/else/AboutMePage";
 import FaqPage from "@/pages/else/FaqPage";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
@@ -27,7 +27,7 @@ import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
 import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
 import ReincarnationPage from "@/pages/ReincarnationPage";
 import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
-import DashboardPage from "@/pages/DashBoardPage";
+import DashboardPage from "@/pages/else/DashBoardPage";
 
 
 function App() {
@@ -66,6 +66,7 @@ function App() {
           <Route path="/faq" element={<FaqPage/>}/>
 
           <Route path="/daily" element={<DailyFortunePage />} />
+          {/* アカウント作成・ログイン・PWリセット */}
           <Route path="/login/to/neo-oracle" element={<LoginPage/>}/>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/reset" element={<ResetPasswordPage />} />

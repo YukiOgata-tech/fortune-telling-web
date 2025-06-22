@@ -1,19 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  doc,
-  getDoc,
-  collection,
-  collectionGroup,
-  query,
-  where,
-  orderBy,
-  limit,
-  startAfter,
-  getDocs,
-  deleteDoc,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/components/features/AuthContext";
 import { updateProfile } from "firebase/auth";
@@ -42,7 +28,7 @@ dayjs.extend(relativeTime);
 dayjs.locale("ja");
 
 const limeGlass =
-  "bg-gradient-to-br from-lime-400/20 via-emerald-500/20 to-lime-600/20 backdrop-blur-xl border border-lime-400/30";
+  "bg-gradient-to-bl from-lime-300/10 via-white/10 to-lime-500/10 backdrop-blur-sm border border-lime-400/30";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -60,36 +46,10 @@ export default function DashboardPage() {
     });
   }, [user]);
 
-  /* ────────── Comments (own) ────────── */
-  const PAGE = 20;
-  const [comments, setComments] = useState([]);
-  const [lastDoc, setLastDoc] = useState(null);
-  const [hasMore, setHasMore] = useState(false);
-  const loadComments = async (after) => {
-    if (!user) return;
-    const base = query(
-      collectionGroup(db, "comments"),
-      where("userId", "==", user.uid),
-      orderBy("createdAt", "desc"),
-      limit(PAGE)
-    );
-    const q = after ? query(base, startAfter(after)) : base;
-    const snap = await getDocs(q);
-    setComments((prev) => [...prev, ...snap.docs.map((d) => ({ id: d.id, ref: d.ref, ...d.data() }))]);
-    setLastDoc(snap.docs[snap.docs.length - 1]);
-    setHasMore(snap.docs.length === PAGE);
-  };
 
-  useEffect(() => {
-    loadComments();
-    // eslint-disable-next-line
-  }, [user]);
+  
 
-  const handleDelete = async (c) => {
-    if (!window.confirm("本当に削除しますか？")) return;
-    await deleteDoc(c.ref);
-    setComments((prev) => prev.filter((x) => x.id !== c.id));
-  };
+
 
   /* ────────── UI Tabs ────────── */
   return (
@@ -115,12 +75,12 @@ export default function DashboardPage() {
         <TabsContent value="profile" className="space-y-8">
           <Card className={`${limeGlass} p-6 w-full`}>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-xl md:text-2xl font-semibold">
-                <SparklesIcon className="w-5 h-5 text-yellow-300" /> ようこそ、
+              <CardTitle className="flex items-center gap-2 text-xl md:text-2xl font-bold text-white biz-udpmincho-regular">
+                <SparklesIcon className="w-5 h-5 text-yellow-400" /> ようこそ、
                 {user?.displayName || user?.email?.split("@")[0]} さん！
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm md:text-base">
+            <CardContent className="space-y-2 text-md md:text-base font-bold text-gray-200">
               <p>メール: {user?.email}</p>
               <p>UID: {user?.uid}</p>
               <p>
@@ -131,7 +91,7 @@ export default function DashboardPage() {
 
           <Card className={`${limeGlass} p-6 space-y-6`}>
             <CardHeader>
-              <CardTitle className="text-xl md:text-2xl font-semibold">設定変更</CardTitle>
+              <CardTitle className="text-xl md:text-2xl font-semibold text-white biz-udpmincho-regular">設定変更</CardTitle>
             </CardHeader>
             <NicknameEdit />
             <BirthdayEdit />
@@ -143,9 +103,9 @@ export default function DashboardPage() {
 
         {/* ─────── Results ─────── */}
         <TabsContent value="results">
-          <Card className={`${limeGlass} p-6 space-y-6 w-full`}>
+          <Card className={`${limeGlass} p-6 space-y-6 w-full text-white`}>
             <CardHeader>
-              <CardTitle className="text-xl md:text-2xl font-semibold">最新の診断結果</CardTitle>
+              <CardTitle className="text-xl md:text-3xl font-semibold biz-udpmincho-regular">最新の診断結果</CardTitle>
             </CardHeader>
             <CardContent>
               {loadingResult ? (
@@ -155,13 +115,13 @@ export default function DashboardPage() {
                   <p className="mb-2">診断日: {latest.date?.slice(0, 10)}</p>
                   <ResultCard typeId={latest.topTypes[0].typeId} className="h-64 max-w-md mx-auto" />
                   <details className="mt-4">
-                    <summary className="cursor-pointer font-semibold">詳細</summary>
+                    <summary className="cursor-pointer font-semibold md:text-xl hover:text-white/50">詳細</summary>
                     <p className="whitespace-pre-line text-sm md:text-base mt-2">
                       {fortuneDetails[latest.topTypes[0].typeId]}
                     </p>
                   </details>
                   <details className="mt-4">
-                    <summary className="cursor-pointer font-semibold">アドバイス</summary>
+                    <summary className="cursor-pointer font-semibold md:text-xl hover:text-white/50">アドバイス</summary>
                     <p className="whitespace-pre-line text-sm md:text-base mt-2">
                       {fortuneAdvice[latest.topTypes[0].typeId]}
                     </p>
