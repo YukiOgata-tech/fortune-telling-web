@@ -10,16 +10,17 @@ import SpaceLoading from "@/components/general/SpaceLoader";
 import SvgSprite from "@/components/general/SvgSprite";
 import Layout from "@/components/Layout";
 // pages import
+import TopPage from "@/pages/commons/TopPage";
 import DiagnosePage from "@/pages/DiagnosePage";
 import QuestionnairePage from "@/pages/QuestionnairePage";
 import ResultPage from "@/pages/ResultPage";
-import PrivacyPolicy from "@/pages/else/PrivacyPolicy";
-import ContactPage from "@/pages/else/ContactPage";
+import PrivacyPolicy from "@/pages/commons/PrivacyPolicy";
+import ContactPage from "@/pages/commons/ContactPage";
 import DailyFortunePage from "@/pages/DailyFortunePage";
-import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/else/AuthPages";
-import { VerifyEmailPage} from "@/pages/else/AccountPages";
-import AboutMe from "@/pages/else/AboutMePage";
-import FaqPage from "@/pages/else/FaqPage";
+import { LoginPage, RegisterPage, ResetPasswordPage } from "@/pages/commons/AuthPages";
+import { VerifyEmailPage} from "@/pages/commons/AccountPages";
+import AboutMe from "@/pages/commons/AboutMePage";
+import FaqPage from "@/pages/commons/FaqPage";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
@@ -27,7 +28,7 @@ import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
 import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
 import ReincarnationPage from "@/pages/ReincarnationPage";
 import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
-import DashboardPage from "@/pages/else/DashBoardPage";
+import DashboardPage from "@/pages/commons/DashBoardPage";
 
 
 function App() {
@@ -57,7 +58,8 @@ function App() {
       <main className="">
         <Background3DSpace />
         <Routes>
-          <Route path="/" element={<DiagnosePage />} />
+          <Route path="/" element={<TopPage />} />
+          <Route path="/diagnose" element={<DiagnosePage />} />
           <Route path="/questionnaire" element={<QuestionnairePage />} />
           <Route path="/result" element={<ResultPage />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy/>} />

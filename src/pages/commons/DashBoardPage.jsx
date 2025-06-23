@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collectionGroup, where, query, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/components/features/AuthContext";
 import { updateProfile } from "firebase/auth";
@@ -12,8 +12,6 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LogoutButton } from "@/components/features/AccountActionButtons";
-import NicknameEdit from "@/components/features/NicknameEdit";
-import BirthdayEdit from "@/components/features/BirthdayEdit";
 import ResultCard from "@/components/ResultCard";
 import { fortuneDetails } from "@/data/main-content/fortuneDetails";
 import { fortuneAdvice } from "@/data/main-content/fortuneAdvice2025";
@@ -23,6 +21,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ja";
 
 import MyCommentsList from "@/components/MycommentsList";
+import InlineEditField from "@/components/features/InlineEditField";
+
 
 dayjs.extend(relativeTime);
 dayjs.locale("ja");
@@ -30,10 +30,85 @@ dayjs.locale("ja");
 const limeGlass =
   "bg-gradient-to-bl from-lime-300/10 via-white/10 to-lime-500/10 backdrop-blur-sm border border-lime-400/30";
 
+
+function ProfileFields() {
+  const { user } = useAuth();
+  const [saving, setSaving] = useState(false);
+  const [birthday, setBirthday] = useState("");
+
+  // Firestoreから誕生日取得
+  useEffect(() => {
+    if (!user) return;
+    const fetchBirthday = async () => {
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if (snap.exists() && snap.data().birthday && snap.data().birthday.toDate) {
+        const date = snap.data().birthday.toDate();
+        setBirthday(date.toISOString().slice(0, 10));
+      }
+    };
+    fetchBirthday();
+  }, [user]);
+
+  // ユーザー名の保存
+  const handleNicknameSave = async (nickname) => {
+    setSaving(true);
+    try {
+      // Auth表示名更新
+      await updateProfile(user, { displayName: nickname });
+      // Firestore更新
+      await setDoc(doc(db, "users", user.uid), { displayName: nickname, updatedAt: new Date() }, { merge: true });
+
+      // コメントuserName一括更新
+      const q = query(collectionGroup(db, "comments"), where("userId", "==", user.uid));
+      const snap = await getDocs(q);
+      const promises = snap.docs.map((d) => updateDoc(d.ref, { userName: nickname }));
+      await Promise.all(promises);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // 誕生日の保存
+  const handleBirthdaySave = async (birthdayVal) => {
+    setSaving(true);
+    try {
+      await setDoc(doc(db, "users", user.uid), { birthday: new Date(birthdayVal) }, { merge: true });
+      setBirthday(birthdayVal);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-1">
+      <InlineEditField
+        label="ユーザー名"
+        value={user?.displayName}
+        minLength={2}
+        maxLength={16}
+        validate={v => v.length >= 2 && v.length <= 16}
+        onSave={handleNicknameSave}
+        disabled={saving}
+      />
+      <div className="border-t border-white/20 my-1" />
+      <InlineEditField
+        label="誕生日"
+        type="date"
+        value={birthday}
+        onSave={handleBirthdaySave}
+        disabled={saving}
+      />
+      {/* ここに今後項目追加も可能 */}
+    </div>
+  );
+}
+
+
 export default function DashboardPage() {
   const { user } = useAuth();
 
-  /* ────────── Result (latest) ────────── */
+  /* ────────── Result データを取得 ────────── */
   const [latest, setLatest] = useState(null);
   const [loadingResult, setLoadingResult] = useState(true);
 
@@ -45,7 +120,6 @@ export default function DashboardPage() {
       setLoadingResult(false);
     });
   }, [user]);
-
 
   
 
@@ -89,13 +163,14 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className={`${limeGlass} p-6 space-y-6`}>
+          <Card className={`${limeGlass} p-6 space-y-1`}>
             <CardHeader>
               <CardTitle className="text-xl md:text-2xl font-semibold text-white biz-udpmincho-regular">設定変更</CardTitle>
             </CardHeader>
-            <NicknameEdit />
-            <BirthdayEdit />
-            <div className="pt-4">
+            <CardContent className="space-y-1 text-white border-1 rounded-2xl">
+              <ProfileFields />
+            </CardContent>
+            <div className="pt-2">
               <LogoutButton className="bg-red-600/30 hover:bg-red-600/60" />
             </div>
           </Card>

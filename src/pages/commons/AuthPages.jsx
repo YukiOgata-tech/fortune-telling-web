@@ -110,8 +110,8 @@ export const LoginPage = () => {
     login,
     logout,
     loginWithGoogle,
-    loginWithApple,
-    loginWithGameCenter,
+    //loginWithApple,
+    //loginWithGameCenter,
   } = useAuth();
 
   const [email, setEmail]       = useState("");
@@ -257,7 +257,7 @@ export const RegisterPage = () => {
 
       <div className="my-6 flex flex-col gap-3">
         <Button onClick={loginWithGoogle} className="social-btn bg-white text-gray-800">
-          <img src="/google.svg" className="h-5 mr-2"/> Google で登録
+          <img src="/images/google-icon.svg" className="h-5 mr-2"/> Google で登録
         </Button>
         {/*<Button onClick={loginWithApple}  className="social-btn bg-black text-white">
           <img src="/apple.svg"  className="h-5 mr-2"/>  Apple で登録
@@ -269,7 +269,7 @@ export const RegisterPage = () => {
 
       <p className="mt-4 text-center text-sm">
         すでにアカウントをお持ちですか？{" "}
-        <Link to="/login" className="text-lime-300 hover:underline">ログインへ</Link>
+        <Link to="/login/to/neo-oracle" className="text-lime-300 hover:underline">ログインへ</Link>
       </p>
     </AuthLayout>
   );

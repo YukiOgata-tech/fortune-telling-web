@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { SOUL_NUMBERS } from "@/data/soulNumbers";
 import CalculationAnimation from "@/components/SoulCalculationAnimation";
+import useGtagEvent from "@/hooks/useGtagEvent";
 // import { Calendar } from "lucide-react";
 
 //  Auth & Firestore
@@ -19,6 +20,8 @@ export default function SoulNumberPage() {
   const [phase, setPhase] = useState("input"); // input | animating | result
   const [soulNumber, setSoulNumber] = useState(null);
   const [shared, setShared] = useState(false);
+
+  const sendGtagEvent = useGtagEvent();
 
   /* ────────────────────────── Firestore 生日自動取得 */
   useEffect(() => {
@@ -71,6 +74,10 @@ export default function SoulNumberPage() {
   /* -------------------- phase handlers -------------------- */
   const startAnimation = () => {
     if (!date) return;
+    sendGtagEvent('click_start_soul_diagnose', {
+      event_category: 'execution',
+      event_label: 'SoulNumberPage: Start',
+    });
     setPhase("animating");
   };
   const handleComplete = (num) => {
@@ -104,8 +111,8 @@ export default function SoulNumberPage() {
             <label/>
             <Button
               disabled={!date}
-              onClick={startAnimation}
               className="w-full text-lg py-2 rounded-xl yuji-mai-regular bg-indigo-500 hover:bg-indigo-400 transition-colors"
+              onClick={startAnimation}         
             >
               診断スタート
             </Button>
@@ -113,12 +120,12 @@ export default function SoulNumberPage() {
         </Card>
       )}
 
-      {/* Calculation Animation */}
+      {/* Calculation（計算） Animation */}
       {phase === "animating" && (
         <CalculationAnimation date={date} onComplete={handleComplete} />
       )}
 
-      {/* Result Card */}
+      {/* Result  部分 */}
       {phase === "result" && resultData && (
         <Card className="w-full max-w-xl bg-gradient-to-br from-[#1a1a2e]/90 via-[#23233a]/85 to-[#222e3c]/90 border-2 border-cyan-400/60 backdrop-blur-xl shadow-xl mt-8 rounded-3xl">
           <CardContent className="p-8 flex flex-col gap-6 z-10">

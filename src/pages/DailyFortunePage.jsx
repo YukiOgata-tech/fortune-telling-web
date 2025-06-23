@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import { useAuth } from "@/components/features/AuthContext";
 import CommentThread from "@/components/CommentThread";
+import useGtagEvent from "@/hooks/useGtagEvent";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -17,6 +18,8 @@ const DailyFortunePage = () => {
   const [result,setResult] = useState(null);
   const [shared,setShared] = useState(false);
   const [birthdayDisabled, setBirthdayDisabled] = useState(false);
+
+  const sendGtagEvent = useGtagEvent();
 
   // --- 追加: Firestoreから誕生日を取得 ---
   useEffect(() => {
@@ -96,7 +99,13 @@ const DailyFortunePage = () => {
             </div>
           </div>
           <button type="submit"
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-fuchsia-500 to-indigo-500 text-white font-bold hover:opacity-90">
+            className="w-full py-3 rounded-xl bg-gradient-to-r from-fuchsia-500 to-indigo-500 text-white font-bold hover:opacity-90"
+            onClick={() => {
+            sendGtagEvent('click_start_daily', {
+            event_category: 'execotion',
+            event_label: 'DailyFrotunePage: Start',
+            });
+          }}>
             今日の運勢を見る
           </button>
         </motion.form>

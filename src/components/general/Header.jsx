@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Sparkles, Menu, Mail, ArrowUpFromLine, LogIn, X, HelpCircle, MoreHorizontal } from "lucide-react";
+import { Sparkles, Menu, Mail, House, LogIn, X, HelpCircle, MoreHorizontal, Pickaxe } from "lucide-react";
 // Auth機能
 import { useAuth } from "@/components/features/AuthContext";
 import LoginStatus from "../features/LoginStaus";
@@ -54,7 +54,7 @@ const Header = () => {
     }
   };
 
-  // PC用のメニュー
+  // メニューの設定・UI
   const PcMenu = () => (
     <nav className="hidden md:flex items-center gap-4 ml-auto">
       {/* 左端 トップへ */}
@@ -63,8 +63,8 @@ const Header = () => {
         onClick={scrollToTop}
         title="ページトップへ"
       >
-        <ArrowUpFromLine size={20} />
-        トップへ
+        <House size={20} />
+        
       </button>
 
       {/* 中央 ログイン系 */}
@@ -87,8 +87,9 @@ const Header = () => {
         <button
           onClick={() => setMoreOpen((v) => !v)}
           className="flex items-center gap-1 px-3 py-2 text-[#f5efff] hover:text-[#ffd6fb] rounded-xl font-bold bg-gradient-to-br from-[#2d3146]/70 to-[#2c2844]/40"
+          title="メニューを開く"
         >
-          <MoreHorizontal size={22} />
+          <Menu size={22} />
           
         </button>
         {moreOpen && (
@@ -96,6 +97,12 @@ const Header = () => {
             className="absolute right-0 mt-2 w-48 bg-[#24253a] rounded-xl shadow-lg py-2 border border-[#3a3a5c] z-50 animate-fadeIn"
             onMouseLeave={() => setMoreOpen(false)}
           >
+            <button
+              className="w-full flex items-center gap-2 px-4 py-2 text-slate-200 hover:bg-[#383a57] transition"
+              onClick={() => { setMoreOpen(false); navigate("/about-me"); }}
+            >
+              <Pickaxe size={18} /> サイトについて
+            </button>
             <button
               className="w-full flex items-center gap-2 px-4 py-2 text-slate-200 hover:bg-[#383a57] transition"
               onClick={() => { setMoreOpen(false); navigate("/contact"); }}
@@ -187,9 +194,10 @@ const Header = () => {
 
         {/* メニューリスト */}
         <nav className="flex flex-col gap-6 px-6 py-6">
-          <NavButton icon={Mail} label="お問い合わせ" onClick={() => navigate("/contact")} title="お問い合わせページへ" />
-          <NavButton icon={ArrowUpFromLine} label="トップ" onClick={scrollToTop} />
+          <NavButton icon={House} label="トップへ" onClick={scrollToTop} />
+          <NavButton icon={Pickaxe} label="このサイトについて" onClick={() => navigate("/about-me")} title="サイト概要へ" />
           <NavButton icon={HelpCircle} label="よくある質問" onClick={() => navigate("/faq")} title="FAQページへ" />
+          <NavButton icon={Mail} label="お問い合わせ" onClick={() => navigate("/contact")} title="お問い合わせページへ" />
   
           {!user ? (
             <NavButton icon={LogIn} label="ログイン" onClick={() => navigate("/login/to/neo-oracle")} />

@@ -1,9 +1,7 @@
 // AuthContext.jsx — Email/Password + Google, Apple, Game Center 完全対応
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updateProfile, signInWithPopup, GoogleAuthProvider, OAuthProvider,} from "firebase/auth";
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updateProfile, signInWithPopup, GoogleAuthProvider, OAuthProvider  } from "firebase/auth";
 
-// Game Center provider: グローバル変数にしてる
-let GameCenterAuthProvider = null;
 
 import {
   doc,
@@ -71,19 +69,7 @@ export const AuthProvider = ({ children }) => {
 
   const loginWithApple = () => signInWithPopup(auth, new OAuthProvider("apple.com"));
 
-  const loginWithGameCenter = async () => {
-  if (!GameCenterAuthProvider) {
-    try {
-      const { GameCenterAuthProvider: GC } = await import("firebase/auth");
-      GameCenterAuthProvider = GC;
-    } catch {
-      alert("Game Center ログインは iOS Safari/PWA 専用です");
-      return;
-    }
-  }
-  return signInWithPopup(auth, new GameCenterAuthProvider());
-};
-
+  
   /* ---------- Public value ---------- */
   const value = {
     user,
@@ -94,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     resetPassword,
     loginWithGoogle,
     loginWithApple,
-    loginWithGameCenter,
+    
   };
 
   return (

@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+
+
 const PrivacyPolicy = () => (
   <div className="max-w-3xl mx-auto bg-white/40 rounded-2xl shadow-xl px-6 py-10 my-12">
     <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center text-[#2c1960]">プライバシーポリシー</h1>
@@ -80,7 +83,11 @@ const PrivacyPolicy = () => (
     <section className="mb-6">
       <h2 className="font-bold text-lg mb-2">9. お問い合わせ</h2>
       <p>
-        プライバシーポリシーに関するご質問・ご相談は、<a href="mailto:info@example.com" className="underline text-blue-600">info@example.com</a> までご連絡ください。
+        プライバシーポリシーに関するご質問・ご相談は、
+        <Link to="/contact" className="underline text-blue-600 ml-1">
+          お問い合わせフォーム
+        </Link>
+        からご連絡ください。
       </p>
     </section>
 

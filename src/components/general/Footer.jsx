@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Github, Twitter, Mail } from "lucide-react";
+import { Github, Twitter, Mail, Instagram } from "lucide-react";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="text-lg font-extrabold text-[#a9e2fa] mb-1 tracking-wide">
             占いみたいな性格診断
           </div>
-          <div className="text-xs text-[#c8c7d9] mb-2">Copyright © {year} Witch Bad All rights reserved.</div>
+          <div className="text-xs text-[#c8c7d9] mb-2">Copyright © {year} Yuyu All rights reserved.</div>
         </div>
         {/* メニューリンク */}
         <nav className="flex items-center gap-5 mb-2 md:mb-0">
@@ -48,21 +48,22 @@ const Footer = () => {
             <Twitter size={22} />
           </a>
           <a
-            href="https://github.com/"
+            href="https://www.instagram.com/neo_oracle_web"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-[#77ffe6] text-[#b5b7ea] transition"
-            aria-label="GitHub"
+            className="hover:text-[#8c4a77] text-[#b5b7ea] transition"
+            aria-label="公式Instagram"
           >
-            <Github size={22} />
+            <Instagram size={22} />
           </a>
-          <a
-            href="mailto:info@example.com"
+          <button
+            onClick={() => navigate("/contact")}
             className="hover:text-[#77ffe6] text-[#b5b7ea] transition"
             aria-label="Mail"
+            type="button"
           >
             <Mail size={22} />
-          </a>
+          </button>
         </div>
       </div>
     </footer>
