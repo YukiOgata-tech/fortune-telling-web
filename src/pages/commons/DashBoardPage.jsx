@@ -13,6 +13,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LogoutButton } from "@/components/features/AccountActionButtons";
 import ResultCard from "@/components/ResultCard";
+import GeniusResultSection from "@/components/GeniusResultsection";
 import { fortuneDetails } from "@/data/main-content/fortuneDetails";
 import { fortuneAdvice } from "@/data/main-content/fortuneAdvice2025";
 import { SparklesIcon, TrashIcon } from "lucide-react";
@@ -210,6 +211,7 @@ export default function DashboardPage() {
               )}
             </CardContent>
           </Card>
+          <GeniusResultSection className="mt-3 md:mt-8 bg-purple-300/20" />
         </TabsContent>
 
         {/* ─────── Comments ─────── */}

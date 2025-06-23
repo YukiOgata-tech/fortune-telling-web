@@ -28,6 +28,7 @@ import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
 import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
 import ReincarnationPage from "@/pages/ReincarnationPage";
 import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
+import GeniusQuiz from "@/pages/HowGeniusPage";
 import DashboardPage from "@/pages/commons/DashBoardPage";
 
 
@@ -82,9 +83,9 @@ function App() {
 
           <Route path="/tarashido" element={<TarashidoDiagnosePage />} />
           <Route path="/tarashido/result" element={<TarashidoResultPage />} />
-
           <Route path="/reincarnation" element={<ReincarnationPage />} />
           <Route path="/soul-number" element={<SoulNumberDiagnoser />} />
+          <Route path="/how-much-genius" element={<GeniusQuiz />} />
 
 
         </Routes>

@@ -26,26 +26,25 @@ const DiagnoseCTA = ({ className = "" }) => {
       {/* メインコンテンツ: flex-1で上部に寄せる */}
       <div className="flex-1 flex flex-col justify-between z-10">
         {/* アイコン + テキスト */}
-        <div className="flex items-start gap-4 mb-2">
+        <div className="flex items-start gap-1 md:gap-4 mb-2">
           <BrainCircuit className="md:w-10 md:h-10 w-8 h-8 text-indigo-400 shrink-0" />
           <div className="space-y-2">
-            <h2 className="text-2xl font-extrabold tracking-tight text-white">
-              <span className="text-3xl text-indigo-200">性格診断</span>で<br className="sm:hidden md:block" />
+            <h2 className="md:text-2xl text-lg font-extrabold tracking-tight text-white">
+              <span className="md:text-3xl text-2xl text-indigo-200">性格診断</span>で<br className="sm:hidden md:block" />
               本当の自分を発見
             </h2>
-            <p className="text-white/80 leading-relaxed">
-              18タイプ×3カテゴリの質問で、直感・思考・感情からあなたの「隠れた性格傾向」を徹底解析。<br />
-              近未来UIとともに、知らなかった自分の新たな一面・才能・バイアスを可視化します。
+            <p className="text-white/80 leading-relaxed md:text-base text-sm">
+              18タイプを質問で、直感・思考・感情からあなたの「隠れた性格傾向」を解析。近未来UIとともに、自分の新たな一面・才能・バイアスを可視化します。
             </p>
           </div>
         </div>
         {/* 行動ボタン */}
-        <div>
+        <div className="flex justify-center">
           <Link to="/diagnose" className="w-full md:w-auto relative z-10">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-600 text-white font-semibold shadow-md"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-1.5 md:py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-600 text-white font-semibold shadow-md"
               onClick={() => {
                 sendGtagEvent('click_diagnose', {
                   event_category: 'CTA',

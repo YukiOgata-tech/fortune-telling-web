@@ -73,7 +73,7 @@ export default function CalculationAnimation({ date, onComplete }) {
   }, [visibleCount, sequence, date, onComplete]);
 
   return (
-    <div className="flex flex-wrap justify-center items-center gap-2 text-5xl font-extrabold select-none">
+    <div className="flex flex-wrap justify-center items-center gap-2 text-5xl font-extrabold select-none dotgothic16-regular">
       <AnimatePresence>
         {sequence.slice(0, visibleCount).map((item, idx) => (
           <motion.span
