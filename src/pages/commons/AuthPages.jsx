@@ -254,6 +254,13 @@ export const RegisterPage = () => {
           登録
         </Button>
       </form>
+      <div className="relative flex items-center my-6">
+        <div className="flex-grow border-t border-white/30" />
+          <span className="mx-3 text-sm text-white/70 select-none">
+          または
+          </span>
+        <div className="flex-grow border-t border-white/30" />
+       </div>
 
       <div className="my-6 flex flex-col gap-3">
         <Button onClick={loginWithGoogle} className="social-btn bg-white text-gray-800">

@@ -57,7 +57,7 @@ const EditorBlock = ({ initialData, onChange }) => {
       }
     };
     // 依存配列は[]で初回のみ
-  }, []);
+  }, [initialData]);
 
   return (
     <div

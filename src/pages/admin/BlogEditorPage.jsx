@@ -22,7 +22,6 @@ const BlogEditorPage = () => {
   const [category, setCategory] = useState("");
   const [content, setContent] = useState({ blocks: [] });
   const [previewMode, setPreviewMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   
@@ -52,7 +51,6 @@ const BlogEditorPage = () => {
     }
   }, [id]);
 
-  if (isLoading) return null;
 
   // サムネイル画像アップロード
   const handleThumbnailChange = async (e) => {
@@ -331,7 +329,7 @@ return (
             <option value="コラム">コラム</option>
           </select>
         </div>
-        <TagInput tags={tags} setTags={setTags} />
+        <TagInput key={id || "new"} tags={tags} setTags={setTags} />
         {!previewMode ? (
           <EditorBlock initialData={content} onChange={setContent} />
         ) : (
