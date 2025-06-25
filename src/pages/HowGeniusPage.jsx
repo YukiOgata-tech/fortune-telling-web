@@ -225,7 +225,7 @@ export default function HowGenius() {
             <img
               src={q.image}
               alt={q.alt || "question-image"}
-              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover mx-auto mb-4 border-2 border-white/60"
+              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover mx-auto mb-4 border-2 border-white/60 pointer-events-none"
             />
           )}
 

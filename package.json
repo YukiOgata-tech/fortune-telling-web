@@ -10,6 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@editorjs/delimiter": "^1.4.2",
+    "@editorjs/editorjs": "^2.30.8",
+    "@editorjs/header": "^2.8.8",
+    "@editorjs/image": "^2.10.2",
+    "@editorjs/link": "^2.6.2",
+    "@editorjs/list": "^2.0.8",
+    "@editorjs/marker": "^1.4.0",
+    "@editorjs/table": "^2.4.5",
+    "@editorjs/warning": "^1.4.1",
     "@google-cloud/secret-manager": "^6.0.1",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -40,7 +49,8 @@
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.8",
     "three": "^0.177.0",
-    "tracery-grammar": "^2.8.4"
+    "tracery-grammar": "^2.8.4",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

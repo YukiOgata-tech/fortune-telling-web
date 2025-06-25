@@ -1,23 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import DiagnoseCTA from "@/components/CTAs/DiagnoseCTA";
-import DailyFortuneCTA from "@/components/CTAs/DailyFortuneCTA";
-import WealthFortuneCTA from "@/components/CTAs/WealthFortuneCTA";
-import TarashidoCTA from "@/components/CTAs/TarashidoCTA";
-import ReincarnationCTA from "@/components/CTAs/ReincarnationCTA";
-import SoulNumberCTA from "@/components/CTAs/SoulNumberCTA";
-import HowGeniusCTA from "@/components/CTAs/HowGeniusCTA";
+import CTAs from "@/components/CTAs";
 import Seo from "@/components/Seo";
 
-const CTAS = [
-  <DiagnoseCTA key="diagnose" />,
-  <DailyFortuneCTA key="daily" />,
-  <WealthFortuneCTA key="wealth" />,
-  <TarashidoCTA key="tarashido" />,
-  <ReincarnationCTA key="reincarnation" />,
-  <SoulNumberCTA key="soulnumber" />,
-  <HowGeniusCTA key="howgenius" />,
-];
+
+
 
 const TopPage = () => {
   return (
@@ -57,36 +44,11 @@ const TopPage = () => {
           </div>
         </motion.div>
       </section>
-
       {/* CTAグリッド */}
-      <section className="max-w-5xl mx-auto px-2 py-4 ">
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 auto-rows-fr"
-          initial="hidden"
-          whileInView="visible"
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.18 },
-            },
-          }}
-        >
-          {CTAS.map((C, i) => (
-            <motion.div
-              className="w-full"
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 36 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ type: "spring", stiffness: 80, damping: 18 }}
-            >
-              {C}
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
-
+      <div>
+        <CTAs/>
+      </div>
+      
       {/* アカウント登録/ログイン誘導 */}
       <section className="max-w-2xl mx-auto rounded-3xl bg-white/10 shadow-lg p-8 mt-4 mb-10 backdrop-blur-sm">
         <motion.div

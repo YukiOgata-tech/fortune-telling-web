@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { createDailyFortune } from "@/utils/fortuneGenerator";
+import { createDailyFortune } from "@/data/fortuneGenerator";
 import { Star, Calendar, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
 

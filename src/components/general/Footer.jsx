@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="text-xs text-[#c8c7d9] mb-2">Copyright © {year} Yuyu All rights reserved.</div>
         </div>
         {/* メニューリンク */}
-        <nav className="flex items-center gap-5 mb-2 md:mb-0">
+        <nav className="flex items-center gap-3.5 mb-2 md:mb-0">
           <button
             className="text-[#a6f2fd] hover:text-[#f7ceff] transition text-sm font-semibold"
             onClick={() => navigate("/about-me")}
@@ -34,6 +34,12 @@ const Footer = () => {
             onClick={() => navigate("/contact")}
           >
             お問い合わせ
+          </button>
+          <button
+            className="text-[#a6f2fd] hover:text-[#f7ceff] transition text-xs font-semibold"
+            onClick={() => navigate("/admin")}
+          >
+            管理画面
           </button>
         </nav>
         {/* SNSアイコン */}

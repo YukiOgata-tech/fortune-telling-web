@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Sparkles, Menu, Mail, House, LogIn, X, HelpCircle, MoreHorizontal, Pickaxe } from "lucide-react";
+import { Sparkles, Menu, Mail, House, LogIn, X, HelpCircle, NotebookText, Pickaxe } from "lucide-react";
 // Auth機能
 import { useAuth } from "@/components/features/AuthContext";
 import LoginStatus from "../features/LoginStaus";
@@ -105,6 +105,12 @@ const Header = () => {
             </button>
             <button
               className="w-full flex items-center gap-2 px-4 py-2 text-slate-200 hover:bg-[#383a57] transition"
+              onClick={() => { setMoreOpen(false); navigate("/blog"); }}
+            >
+              <NotebookText size={18} /> ブログページ
+            </button>
+            <button
+              className="w-full flex items-center gap-2 px-4 py-2 text-slate-200 hover:bg-[#383a57] transition"
               onClick={() => { setMoreOpen(false); navigate("/contact"); }}
             >
               <Mail size={18} /> お問い合わせ
@@ -196,6 +202,7 @@ const Header = () => {
         <nav className="flex flex-col gap-6 px-6 py-6">
           <NavButton icon={House} label="トップへ" onClick={scrollToTop} />
           <NavButton icon={Pickaxe} label="このサイトについて" onClick={() => navigate("/about-me")} title="サイト概要へ" />
+          <NavButton icon={NotebookText} label="ブログ" onClick={() => navigate("/blog")} title="ブログへ" />
           <NavButton icon={HelpCircle} label="よくある質問" onClick={() => navigate("/faq")} title="FAQページへ" />
           <NavButton icon={Mail} label="お問い合わせ" onClick={() => navigate("/contact")} title="お問い合わせページへ" />
   

@@ -3,7 +3,7 @@ import { questions } from "@/data/reincarnation/reincarnationQuestions";
 import { calcDiagnosis } from "@/data/reincarnation/reincarnationLogic";
 import QuestionStep from "@/components/reincarnation/QuestionStep";
 import ProgressBar from "@/components/reincarnation/ProgressBarForRein";
-import ResultPage from "@/pages/ReincarnationResultPage";
+import ResultPage from "@/pages/reincarnation/ReincarnationResultPage";
 import { motion, AnimatePresence } from "framer-motion";
 
 const shuffle = arr => arr.map(v => [v, Math.random()]).sort((a,b) => a[1]-b[1]).map(([v])=>v);
