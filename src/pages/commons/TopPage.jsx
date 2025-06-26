@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import CTAs from "@/components/CTAs";
 import Seo from "@/components/Seo";
 
-
-
-
 const TopPage = () => {
   return (
     <div className="min-h-screen text-white">
@@ -44,11 +41,76 @@ const TopPage = () => {
           </div>
         </motion.div>
       </section>
+      {/* サイト紹介リード・SEO対応 */}
+      <section className="w-full flex justify-center items-center py-8 mb-2">
+        <motion.div
+          className="max-w-4xl text-center relative group cursor-pointer select-none"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+        >
+          <span className="pointer-events-none absolute left-0 top-0 w-full h-full z-20 overflow-hidden">
+            <span className="shine block absolute left-[-75%] top-0 w-2/3 h-full" />
+          </span>
+          <h2 className="text-xl md:text-2xl font-bold mb-2 text-yellow-100 tracking-wide drop-shadow-sm z-10 relative biz-udpmincho-regular">
+            あなたぴったりの診断・占いが毎日楽しめる
+          </h2>
+          <p className="text-sm md:text-lg text-white/90 font-medium leading-relaxed z-10 relative">
+            <strong className="text-fuchsia-300 font-semibold biz-udpmincho-regular">
+              Neo-Oracle
+            </strong>
+            は、<strong>性格診断</strong>や
+            <span className="underline underline-offset-4 decoration-indigo-400">
+              占い
+            </span>
+            、<strong>年収診断</strong>
+            など多彩な無料コンテンツを用意した次世代の自己分析サイトです。
+            <br />
+            「毎日占い」など
+            <span className="text-fuchsia-200 font-bold">累計2万人以上</span>
+            が体験！
+            <br className="hidden md:block" />
+            心理テスト・運勢占い・仕事適性・恋愛傾向・あなたの強みや可能性まで幅広くサポートします。
+            <br />
+            初めての方もリピーターの方も、
+            <strong>あなたの“今”に寄り添う診断体験</strong>
+            をぜひ楽しんで！！
+          </p>
+          <style jsx>{`
+            .shine {
+              pointer-events: none;
+              height: 100%;
+              background: linear-gradient(
+                110deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.45) 55%,
+                transparent 70%
+              );
+              filter: blur(0.5px);
+              opacity: 0;
+              transition: opacity 0.18s;
+            }
+            .group:hover .shine {
+              animation: shine 1.0s cubic-bezier(0.57, 0.12, 0.6, 1.15) 1;
+              opacity: 1;
+            }
+            @keyframes shine {
+              from {
+                left: -75%;
+              }
+              to {
+                left: 120%;
+              }
+            }
+          `}</style>
+        </motion.div>
+      </section>
+
       {/* CTAグリッド */}
       <div>
-        <CTAs/>
+        <CTAs />
       </div>
-      
+
       {/* アカウント登録/ログイン誘導 */}
       <section className="max-w-2xl mx-auto rounded-3xl bg-white/10 shadow-lg p-8 mt-4 mb-10 backdrop-blur-sm">
         <motion.div
@@ -107,7 +169,7 @@ const TopPage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
         >
-          <h2 className="text-2xl font-bold mb-4">Neo-Oracleについて</h2>
+          <h2 className="text-2xl font-bold mb-4 biz-udpmincho-regular">Neo-Oracleについて</h2>
           <p className="text-lg mb-2 text-white/90">
             Neo-Oracleは、性格診断や各種占いを、心理学や統計・AI技術を活かして現代的に再構成した新しい自己分析サイトです。
           </p>

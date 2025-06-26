@@ -32,7 +32,7 @@ const AdminBlogListPage = () => {
         {articles.map(article => (
           <li
             key={article.id}
-            className="bg-white/5 rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between shadow-md hover:bg-fuchsia-950/20 transition border border-fuchsia-900/20"
+            className="bg-white/5 rounded-2xl p-2 md:p-5 flex flex-col md:flex-row md:items-center justify-between shadow-md hover:bg-fuchsia-950/20 transition border border-fuchsia-900/20"
           >
             <div className="flex-1 min-w-0">
               <Link
@@ -51,7 +51,7 @@ const AdminBlogListPage = () => {
                     : ""}
                 </span>
               </div>
-              <div className="text-gray-300 text-sm truncate">
+              <div className="text-gray-300 text-sm truncate hidden md:block">
                 {/* 本文の冒頭をプレビュー */}
                 {article.content?.blocks?.find(
                   block => block.type === "paragraph" || block.type === "header"

@@ -48,7 +48,7 @@ export default function AboutMe() {
             {/* サイトの使い方 */}
             <section>
               <h2 className="text-xl font-semibold mb-2 text-cyan-300 new-tegomin-regular">-サイトの使い方</h2>
-              <p className="biz-udpmincho-regular">
+              <div className="biz-udpmincho-regular">
                 会員登録・ログイン機能をご用意しています。ログインすることで、診断結果の振り返りや入力項目の省略など、より便利にご利用いただけます。
                 また、アカウント登録していただくと、
                 <ul className="list-disc list-inside ml-4 my-2">
@@ -58,7 +58,7 @@ export default function AboutMe() {
                 </ul>
                 といった機能も順次拡充していきます。<br />
                 なお、診断結果はあくまでデータです。信じていいのは自分自身！！「自分の人生を動かせるのは自分自身」、この気持ちを忘れずに利用してください♪
-              </p>
+              </div>
             </section>
 
             {/* チーム仲間募集 */}

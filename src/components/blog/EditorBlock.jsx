@@ -8,7 +8,6 @@ import Header from "@editorjs/header";
 import Delimiter from "@editorjs/delimiter";
 import List from "@editorjs/list";
 import Table from "@editorjs/table";
-import { uploadImageToStorage } from "@/utils/uploadImageToStorage";
 
 const HOLDER_ID = "editorjs"; // 必ず一意
 
@@ -16,7 +15,10 @@ const EditorBlock = ({ initialData, onChange }) => {
   const editorInstance = useRef(null);
 
   useEffect(() => {
-    if (editorInstance.current && typeof editorInstance.current.destroy === "function") {
+    if (
+      editorInstance.current &&
+      typeof editorInstance.current.destroy === "function"
+    ) {
       editorInstance.current.destroy();
       editorInstance.current = null;
     }
@@ -30,12 +32,16 @@ const EditorBlock = ({ initialData, onChange }) => {
           class: ImageTool,
           config: {
             uploader: {
+              // 動的インポートしている
               async uploadByFile(file) {
+                const { uploadImageToStorage } = await import(
+                  "@/utils/uploadImageToStorage"
+                );
                 const url = await uploadImageToStorage(file);
                 return { success: 1, file: { url } };
-              }
-            }
-          }
+              },
+            },
+          },
         },
         marker: Marker,
         warning: Warning,
@@ -51,19 +57,22 @@ const EditorBlock = ({ initialData, onChange }) => {
     });
 
     return () => {
-      if (editorInstance.current && typeof editorInstance.current.destroy === "function") {
+      if (
+        editorInstance.current &&
+        typeof editorInstance.current.destroy === "function"
+      ) {
         editorInstance.current.destroy();
         editorInstance.current = null;
       }
     };
     // 依存配列は[]で初回のみ
-  }, [initialData]);
+  }, []);
 
   return (
     <div
       id={HOLDER_ID}
       className="bg-white/70  rounded-2xl shadow-lg p-4"
-      style={{ minHeight: 200,  }}
+      style={{ minHeight: 200 }}
     />
   );
 };

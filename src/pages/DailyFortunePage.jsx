@@ -53,8 +53,8 @@ const DailyFortunePage = () => {
 
   const handleShare = async () => {
     const shareData = {
-      title: "今日の運勢をシェア",
-      text: "私の今日の運勢をチェックしてみて！",
+      title: "今日の運勢をシェア | Neo Oracle",
+      text: "あなたの今日の運勢をチェックしてみて！",
       url: window.location.href
     };
     try {

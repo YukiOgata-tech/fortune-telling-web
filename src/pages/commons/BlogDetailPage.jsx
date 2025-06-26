@@ -46,7 +46,7 @@ const renderBlock = (block, idx) => {
         key={idx}
         className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-900 p-4 rounded mb-4"
       >
-        <div className="font-bold">{block.data.title}</div>
+        <div className="font-bold" dangerouslySetInnerHTML={{ __html: block.data.title }}/>
         <div>{block.data.message}</div>
       </div>
     );

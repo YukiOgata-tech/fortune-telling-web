@@ -23,6 +23,7 @@ const BlogEditorPage = () => {
   const [content, setContent] = useState({ blocks: [] });
   const [previewMode, setPreviewMode] = useState(false);
   const navigate = useNavigate();
+  const [isContentLoaded, setIsContentLoaded] = useState(!id); 
 
   
 
@@ -39,6 +40,7 @@ const BlogEditorPage = () => {
           setCategory(data.category ?? "");
           setContent(data.content ?? { blocks: [] });
         }
+        setIsContentLoaded(true); // ここでロード完了
       };
       fetchData();
     } else {
@@ -48,6 +50,7 @@ const BlogEditorPage = () => {
       setTags([]);
       setCategory("");
       setContent({ blocks: [] });
+      setIsContentLoaded(true);
     }
   }, [id]);
 
@@ -241,7 +244,7 @@ const BlogEditorPage = () => {
                   key={idx}
                   className="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-900 p-4 rounded mb-4"
                 >
-                  <div className="font-bold">{block.data.title}</div>
+                  <div className="font-bold" dangerouslySetInnerHTML={{ __html: block.data.title }}/>
                   <div>{block.data.message}</div>
                 </div>
               );
@@ -329,9 +332,13 @@ return (
             <option value="コラム">コラム</option>
           </select>
         </div>
-        <TagInput key={id || "new"} tags={tags} setTags={setTags} />
+        <TagInput tags={tags} setTags={setTags} />
         {!previewMode ? (
-          <EditorBlock initialData={content} onChange={setContent} />
+          isContentLoaded ? (
+            <EditorBlock key={id || "new"} initialData={content} onChange={setContent} />
+          ) : (
+            <div>Loading...</div>
+          )
         ) : (
           <div>{renderPreview()}</div>
         )}

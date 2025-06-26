@@ -6,6 +6,7 @@ import TarashidoCTA from "@/components/CTAs/TarashidoCTA";
 import ReincarnationCTA from "@/components/CTAs/ReincarnationCTA";
 import SoulNumberCTA from "@/components/CTAs/SoulNumberCTA";
 import HowGeniusCTA from "@/components/CTAs/HowGeniusCTA";
+import DailySayingCTA from "@/components/CTAs/DailySayingCTA";
 
 const CTAS = [
   <DiagnoseCTA key="diagnose" />,
@@ -15,6 +16,7 @@ const CTAS = [
   <ReincarnationCTA key="reincarnation" />,
   <SoulNumberCTA key="soulnumber" />,
   <HowGeniusCTA key="howgenius" />,
+  <DailySayingCTA key="dailysaying" />
 ];
 
 const CTAs = () => (

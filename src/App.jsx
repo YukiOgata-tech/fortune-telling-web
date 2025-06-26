@@ -33,6 +33,7 @@ import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
 import ReincarnationPage from "@/pages/reincarnation/ReincarnationPage";
 import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
 import GeniusQuiz from "@/pages/HowGeniusPage";
+import DailySaying from "@/pages/DailySayingpage";
 import DashboardPage from "@/pages/commons/DashBoardPage";
 import BlogListPage from "@/pages/commons/BlogListPage";
 import BlogDetailPage from "@/pages/commons/BlogDetailPage";
@@ -46,7 +47,7 @@ function App() {
 
   useEffect(() => {
     // 例: 最低1秒はローディング表示、初期データfetch完了でsetIsLoading(false)
-    const timer = setTimeout(() => setIsLoading(false), 1000);
+    const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -81,9 +82,18 @@ function App() {
               <Route path="/blog/:id" element={<BlogDetailPage />} />
               {/* 管理者ページ（ガード済み） */}
               <Route path="/admin" element={<AdminHomePageWithGuard />} />
-              <Route path="/admin/blog-list" element={<AdminBlogListPageWithGuard />}/>
-              <Route path="/admin/blog-edit" element={<BlogEditorPageWithGuard />}/>
-              <Route path="/admin/blog-edit/:id" element={<BlogEditorPageWithGuard />}/>
+              <Route
+                path="/admin/blog-list"
+                element={<AdminBlogListPageWithGuard />}
+              />
+              <Route
+                path="/admin/blog-edit"
+                element={<BlogEditorPageWithGuard />}
+              />
+              <Route
+                path="/admin/blog-edit/:id"
+                element={<BlogEditorPageWithGuard />}
+              />
 
               <Route path="/daily" element={<DailyFortunePage />} />
               {/* アカウント作成・ログイン・PWリセット */}
@@ -124,6 +134,7 @@ function App() {
               <Route path="/reincarnation" element={<ReincarnationPage />} />
               <Route path="/soul-number" element={<SoulNumberDiagnoser />} />
               <Route path="/how-much-genius" element={<GeniusQuiz />} />
+              <Route path="/dailySaying" element={<DailySaying/>} />
             </Routes>
           </main>
           <Footer />

@@ -8,29 +8,13 @@ import { Sparkles } from "lucide-react";
 import { useAuth } from "@/components/features/AuthContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 /* -------------------------------------------------- */
-const FormWrap = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    className="min-h-screen flex items-center justify-center bg-gradient-to-br from-lime-500/10 via-emerald-600/10 to-lime-700/20 p-4"
-  >
-    {children}
-  </motion.div>
-);
 
 const AuthLayout = ({ title, children }) => (
   <div className="relative min-h-screen overflow-hidden text-white">
-
     <div className="mx-auto flex max-w-5xl items-center justify-center px-4 py-24 md:py-32">
-
       {/* カード */}
       <motion.div
         className="w-full max-w-xl rounded-2xl bg-white/10 backdrop-blur-lg md:ml-12"
@@ -94,7 +78,10 @@ export const ResetPasswordPage = () => {
         </form>
       )}
       <p className="mt-6 text-center text-sm">
-        <Link to="/login/to/neo-oracle" className="text-emerald-300 hover:underline">
+        <Link
+          to="/login/to/neo-oracle"
+          className="text-emerald-300 hover:underline"
+        >
           ログインに戻る
         </Link>
       </p>
@@ -114,9 +101,9 @@ export const LoginPage = () => {
     //loginWithGameCenter,
   } = useAuth();
 
-  const [email, setEmail]       = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError]       = useState(null);
+  const [error, setError] = useState(null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -135,11 +122,20 @@ export const LoginPage = () => {
         <p className="mb-6 text-center text-sm">
           {user.displayName || user.email} でログインしています。
         </p>
-        <Button onClick={() => navigate("/dashboard")}
-          className="w-full bg-gradient-to-r from-lime-400 to-emerald-500">
+        <Button
+          onClick={() => navigate("/dashboard")}
+          className="w-full bg-gradient-to-r from-lime-400 to-emerald-500"
+        >
           ダッシュボードへ
         </Button>
-        <Button variant="outline" className="w-full mt-4" onClick={logout}>
+        <Button
+          variant="outline"
+          className="w-full mt-4"
+          onClick={async () => {
+            await logout();
+            navigate("/login/to/neo-oracle");
+          }}
+        >
           別アカウントでログイン
         </Button>
       </AuthLayout>
@@ -166,22 +162,27 @@ export const LoginPage = () => {
           className="bg-white/50 backdrop-blur"
         />
         {error && <p className="text-sm text-red-400">{error}</p>}
-        <Button type="submit" className="w-full bg-gradient-to-r from-lime-400 to-emerald-500 hover:opacity-90">
+        <Button
+          type="submit"
+          className="w-full bg-gradient-to-r from-lime-400 to-emerald-500 hover:opacity-90"
+        >
           ログイン
         </Button>
       </form>
       <div className="relative flex items-center my-6">
         <div className="flex-grow border-t border-white/30" />
-          <span className="mx-3 text-sm text-white/70 select-none">
-          または
-          </span>
+        <span className="mx-3 text-sm text-white/70 select-none">または</span>
         <div className="flex-grow border-t border-white/30" />
-       </div>
+      </div>
 
       {/* Social Buttons */}
       <div className="my-6 flex flex-col gap-3">
-        <Button onClick={loginWithGoogle} className="social-btn bg-white text-gray-800">
-          <img src="/images/google-icon.svg" className="h-5 mr-2"/> Google で続行
+        <Button
+          onClick={loginWithGoogle}
+          className="social-btn bg-white text-gray-800"
+        >
+          <img src="/images/google-icon.svg" className="h-5 mr-2" /> Google
+          で続行
         </Button>
         {/*<Button onClick={loginWithApple}  className="social-btn bg-black text-white">
           <img src="/apple.svg"  className="h-5 mr-2"/>  Apple で続行
@@ -203,15 +204,15 @@ export const LoginPage = () => {
   );
 };
 
-
 /* -------------------- Register --------------------- */
 export const RegisterPage = () => {
   const navigate = useNavigate();
-  const { register, loginWithGoogle, loginWithApple, loginWithGameCenter } = useAuth();
-  const [email, setEmail]       = useState("");
+  const { register, loginWithGoogle, loginWithApple, loginWithGameCenter } =
+    useAuth();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName]         = useState("");
-  const [error, setError]       = useState(null);
+  const [name, setName] = useState("");
+  const [error, setError] = useState(null);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -250,21 +251,26 @@ export const RegisterPage = () => {
           className="bg-white/20 backdrop-blur"
         />
         {error && <p className="text-sm text-red-400">{error}</p>}
-        <Button type="submit" className="w-full bg-gradient-to-r from-lime-400 to-emerald-500 hover:opacity-90">
+        <Button
+          type="submit"
+          className="w-full bg-gradient-to-r from-lime-400 to-emerald-500 hover:opacity-90"
+        >
           登録
         </Button>
       </form>
       <div className="relative flex items-center my-6">
         <div className="flex-grow border-t border-white/30" />
-          <span className="mx-3 text-sm text-white/70 select-none">
-          または
-          </span>
+        <span className="mx-3 text-sm text-white/70 select-none">または</span>
         <div className="flex-grow border-t border-white/30" />
-       </div>
+      </div>
 
       <div className="my-6 flex flex-col gap-3">
-        <Button onClick={loginWithGoogle} className="social-btn bg-white text-gray-800">
-          <img src="/images/google-icon.svg" className="h-5 mr-2"/> Google で登録
+        <Button
+          onClick={loginWithGoogle}
+          className="social-btn bg-white text-gray-800"
+        >
+          <img src="/images/google-icon.svg" className="h-5 mr-2" /> Google
+          で登録
         </Button>
         {/*<Button onClick={loginWithApple}  className="social-btn bg-black text-white">
           <img src="/apple.svg"  className="h-5 mr-2"/>  Apple で登録
@@ -276,12 +282,16 @@ export const RegisterPage = () => {
 
       <p className="mt-4 text-center text-sm">
         すでにアカウントをお持ちですか？{" "}
-        <Link to="/login/to/neo-oracle" className="text-lime-300 hover:underline">ログインへ</Link>
+        <Link
+          to="/login/to/neo-oracle"
+          className="text-lime-300 hover:underline"
+        >
+          ログインへ
+        </Link>
       </p>
     </AuthLayout>
   );
 };
-
 
 /* --------------- Route Export Helper --------------- */
 export default {
