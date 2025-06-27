@@ -6,6 +6,7 @@ import { useAuth } from "@/components/features/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import useGtagEvent from "@/hooks/useGtagEvent";
+import Seo from "@/components/Seo";
 
 // コメントパターン
 const messagePatterns = [
@@ -139,6 +140,12 @@ export default function DailySayingPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center  text-white p-4">
+      <Seo
+        title="今日の名言診断 - あなたに贈る一日一言 | Neo-Oracle"
+        description="誕生日と名前から、今日のあなたにぴったりの名言・格言を毎日お届けします。偉人や哲学者の言葉が、あなたの人生や一日に新たな視点とインスピレーションを与えてくれるはず。"
+        keywords="今日の名言, 名言, 格言, 診断, 毎日, 偉人, 哲学者, 人生, 自己啓発, インスピレーション"
+        image="/images/CTAs/bg-dailysaying-cta.png"
+      />
       <div className="relative w-full max-w-2xl bg-slate-900/50  rounded-xl shadow-xl p-8">
         {/* === 背景イメージレイヤー ========================== */}
         <div

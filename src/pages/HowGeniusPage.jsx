@@ -11,15 +11,11 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { geniusQuestions } from "@/data/geniusQuestions";
-import { geniusResults }   from "@/data/geniusResults";
-import { useAuth }         from "@/components/features/AuthContext";   // ← パス要調整
-import { db }              from "@/lib/firebase";          // firebase 初期化ファイル
-import {
-  doc,
-  setDoc,
-  serverTimestamp,
-  getDoc,
-} from "firebase/firestore";
+import { geniusResults } from "@/data/geniusResults";
+import Seo from "@/components/Seo";
+import { useAuth } from "@/components/features/AuthContext"; // ← パス要調整
+import { db } from "@/lib/firebase"; // firebase 初期化ファイル
+import { doc, setDoc, serverTimestamp, getDoc } from "firebase/firestore";
 
 // ---------- utils ----------
 const shuffle = (arr) => {
@@ -35,15 +31,15 @@ const shuffle = (arr) => {
 export default function HowGenius() {
   const { user } = useAuth(); // AuthContext からログインユーザー
   /* 画面フロー: "start" | "quiz" | "result" */
-  const [phase, setPhase]     = useState("start");
-  const [birthday, setBD]     = useState("");          // 誕生日入力
-  const [questions, setQs]    = useState([]);
-  const [idx, setIdx]         = useState(0);
-  const [scores, setScores]   = useState([]);
+  const [phase, setPhase] = useState("start");
+  const [birthday, setBD] = useState(""); // 誕生日入力
+  const [questions, setQs] = useState([]);
+  const [idx, setIdx] = useState(0);
+  const [scores, setScores] = useState([]);
   /* 保存可否 */
-  const [save, setSave]       = useState(true);        // チェックボックスの状態
-  const [saving, setSaving]   = useState(false);       // ボタン多重防止
-  const [saved, setSaved]     = useState(false);       // 保存完了表示
+  const [save, setSave] = useState(true); // チェックボックスの状態
+  const [saving, setSaving] = useState(false); // ボタン多重防止
+  const [saved, setSaved] = useState(false); // 保存完了表示
 
   /* 1) ログインユーザーに birthday があれば取得して自動入力 */
   useEffect(() => {
@@ -51,7 +47,9 @@ export default function HowGenius() {
     (async () => {
       const snap = await getDoc(doc(db, "users", user.uid));
       if (snap.exists() && snap.data().birthday) {
-        const iso = new Date(snap.data().birthday.seconds * 1000).toISOString().slice(0, 10);
+        const iso = new Date(snap.data().birthday.seconds * 1000)
+          .toISOString()
+          .slice(0, 10);
         setBD(iso);
       }
     })();
@@ -111,8 +109,9 @@ export default function HowGenius() {
         >
           <h1 className="text-center text-3xl font-bold">あなたの天才度診断</h1>
           <p className="leading-relaxed">
-            歴史的な天才たちの思考様式に基づいた 15 問で、あなたの“発想傾向”を解析します。
-            所要時間は 3〜4 分。気軽に挑戦してみましょう！
+            歴史的な天才たちの思考様式に基づいた 15
+            問で、あなたの“発想傾向”を解析します。 所要時間は 3〜4
+            分。気軽に挑戦してみましょう！
           </p>
 
           {/* 誕生日入力 (任意) */}
@@ -152,7 +151,9 @@ export default function HowGenius() {
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-2xl w-full bg-white/10 backdrop-blur-md rounded-2xl p-6 sm:p-10 shadow-2xl space-y-6"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center">{res.title}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center">
+            {res.title}
+          </h2>
           <p className="leading-relaxed whitespace-pre-wrap">{res.analysis}</p>
 
           <div className="border-t border-white/20 pt-4 space-y-2">
@@ -182,7 +183,11 @@ export default function HowGenius() {
                       : "bg-gradient-to-r from-indigo-500 to-pink-500 hover:opacity-90"
                   }`}
               >
-                {saved ? "保存しました ✅" : saving ? "保存中…" : "結果を保存する"}
+                {saved
+                  ? "保存しました ✅"
+                  : saving
+                  ? "保存中…"
+                  : "結果を保存する"}
               </button>
             </div>
           )}
@@ -207,6 +212,12 @@ export default function HowGenius() {
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 text-white">
+      <Seo
+        title="あなたの天才度診断 - 歴史的偉人タイプでわかる発想傾向 | Neo-Oracle"
+        description="あなたに秘められた天才性を無料で診断！15の質問から、あなたの思考タイプを分析し、歴史的な天才に例えて解説します。自分の強みやユニークな発想力を発見しよう。"
+        keywords="天才診断, 性格診断, 無料, 思考タイプ, 発想力, 心理テスト, 偉人, 強み, 自己分析"
+        image="/images/CTAs/bg-genius-cta.png"
+      />
       {/* progress bar */}
       <div
         className="absolute top-0 left-0 h-1 bg-indigo-500 transition-all duration-200"

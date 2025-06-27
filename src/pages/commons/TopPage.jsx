@@ -7,8 +7,10 @@ const TopPage = () => {
   return (
     <div className="min-h-screen text-white">
       <Seo
-        title="Neo-Oracle | あなたのための診断・占いサイト"
-        description="近未来的UIで性格診断・各種占いを体験。安心・無料でユーザー参加型の自己分析。"
+        title="Neo-Oracle | 未来技術で本当の自分を知る【無料性格診断・占い】"
+        description="Neo-Oracleは、性格診断・恋愛傾向・仕事適性・今日の運勢など、多彩な無料占いを未来的なUIで楽しめる自己分析サイトです。あなたの隠れた才能や可能性を発見し、毎日を豊かにするヒントを見つけよう。"
+        keywords="性格診断, 占い, 無料, 自己分析, 心理テスト, 運勢, 今日の歌, 名言, 仕事適性, 恋愛傾向, 生涯年収, 当たる"
+        image="/images/Top-banner.png" // OGP用の画像を指定
       />
 
       {/* ヒーローバナー */}

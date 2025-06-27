@@ -28,12 +28,12 @@ import FaqPage from "@/pages/commons/FaqPage";
 import FortuneWealthHome from "@/pages/wealth/FortuneWealthHome";
 import FortuneWealthQuestion from "@/pages/wealth/FortuneWealthQuestion";
 import FortuneWealthResult from "@/pages/wealth/FortuneWealthResult";
-import TarashidoDiagnosePage from "@/pages/tarashido/TarashidoDiagnosePage";
-import TarashidoResultPage from "@/pages/tarashido/TarashidoResultPage";
+import TarashidoPage from "@/pages/TarashidoPage";
 import ReincarnationPage from "@/pages/reincarnation/ReincarnationPage";
 import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
 import GeniusQuiz from "@/pages/HowGeniusPage";
 import DailySaying from "@/pages/DailySayingpage";
+import TodaySongPage from "@/pages/TodaySongPage";
 import DashboardPage from "@/pages/commons/DashBoardPage";
 import BlogListPage from "@/pages/commons/BlogListPage";
 import BlogDetailPage from "@/pages/commons/BlogDetailPage";
@@ -126,15 +126,12 @@ function App() {
                 path="/fortune-wealth/result"
                 element={<FortuneWealthResult />}
               />
-              <Route path="/tarashido" element={<TarashidoDiagnosePage />} />
-              <Route
-                path="/tarashido/result"
-                element={<TarashidoResultPage />}
-              />
+              <Route path="/tarashido" element={<TarashidoPage />} />
               <Route path="/reincarnation" element={<ReincarnationPage />} />
               <Route path="/soul-number" element={<SoulNumberDiagnoser />} />
               <Route path="/how-much-genius" element={<GeniusQuiz />} />
               <Route path="/dailySaying" element={<DailySaying/>} />
+              <Route path="/dailysong" element={<TodaySongPage/>}/>
             </Routes>
           </main>
           <Footer />

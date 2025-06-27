@@ -4,25 +4,34 @@ import { calcDiagnosis } from "@/data/reincarnation/reincarnationLogic";
 import QuestionStep from "@/components/reincarnation/QuestionStep";
 import ProgressBar from "@/components/reincarnation/ProgressBarForRein";
 import ResultPage from "@/pages/reincarnation/ReincarnationResultPage";
+import Seo from "@/components/Seo";
 import { motion, AnimatePresence } from "framer-motion";
 
-const shuffle = arr => arr.map(v => [v, Math.random()]).sort((a,b) => a[1]-b[1]).map(([v])=>v);
+const shuffle = (arr) =>
+  arr
+    .map((v) => [v, Math.random()])
+    .sort((a, b) => a[1] - b[1])
+    .map(([v]) => v);
 
 export default function ReincarnationPage() {
   // シャッフル済みの質問・各選択肢もシャッフル
-  const questionList = useMemo(() => shuffle(questions).map(q => ({
-    ...q,
-    options: shuffle(q.options)
-  })), []);
+  const questionList = useMemo(
+    () =>
+      shuffle(questions).map((q) => ({
+        ...q,
+        options: shuffle(q.options),
+      })),
+    []
+  );
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [result, setResult] = useState(null);
 
   const handleAnswer = (optionIdx) => {
-    setAnswers(ans => [...ans, optionIdx]);
+    setAnswers((ans) => [...ans, optionIdx]);
     if (step < questionList.length - 1) {
-      setStep(s => s + 1);
+      setStep((s) => s + 1);
     } else {
       // スコア集計
       const score = {};
@@ -47,9 +56,14 @@ export default function ReincarnationPage() {
     ? "あなたの前世診断の結果はこちら！"
     : "15の質問に答えて、あなたの前世タイプを探ろう。";
 
-
   return (
     <div className="min-h-screen w-full p-6 flex flex-col items-center justify-center">
+      <Seo
+        title="前世診断 - 15の質問でわかるあなたの魂のルーツ | Neo-Oracle"
+        description="あなたの前世はどんな人物だった？15の質問に答えるだけで、あなたの魂のタイプを診断します。騎士、魔法使い、商人、芸術家など、隠されたあなたのルーツを探ってみよう。"
+        keywords="前世診断, 占い, 性格診断, 無料, 魂, ルーツ, 輪廻転生, 心理テスト, 騎士, 魔法使い"
+        image="/images/CTAs/bg-reincarnation-cta.png"
+      />
       <AnimatePresence mode="wait">
         <div className="w-full max-w-2xl mx-auto">
           {/* 説明テキスト（プログレスバーの上） */}
