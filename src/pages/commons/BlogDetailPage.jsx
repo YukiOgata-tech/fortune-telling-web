@@ -4,7 +4,7 @@ import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
-import Seo from "@/components/Seo"; // ライブラリ不要版のSeoコンポーネントをインポート
+import Seo from "@/components/Seo";
 
 // ブログコンテンツの各ブロックをレンダリングする関数
 const renderBlock = (block, idx) => {
@@ -46,7 +46,7 @@ const renderBlock = (block, idx) => {
                 <div className="mt-1" dangerouslySetInnerHTML={{ __html: block.data.message }}/>
             </div>
         );
-    case "table": { // <--- エラー修正箇所
+    case "table": {
         if (!block.data?.content || !Array.isArray(block.data.content)) {
             return null;
         }
@@ -55,7 +55,6 @@ const renderBlock = (block, idx) => {
                 <table className="w-full text-left border-collapse">
                     <tbody className="divide-y divide-slate-700">
                         {block.data.content.map((row, ri) => {
-                            // rowが文字列であることを確認してからsplitを実行
                             if (typeof row !== 'string') return null;
                             return (
                                 <tr key={ri} className="hover:bg-slate-800/50">
@@ -70,12 +69,20 @@ const renderBlock = (block, idx) => {
             </div>
         );
     }
+    // ★ リンクツールに対応
+    case "linkTool":
+        return (
+            <a href={block.data.link} target="_blank" rel="noopener noreferrer" className="block my-5 p-4 border rounded-lg hover:bg-slate-800 transition-colors">
+                <strong className="font-bold text-cyan-400">{block.data.meta.title || block.data.link}</strong>
+                <p className="text-sm text-gray-400 mt-1">{block.data.meta.description}</p>
+                <p className="text-xs text-gray-500 mt-2 truncate">{block.data.link}</p>
+            </a>
+        )
     default:
       return null;
   }
 };
 
-// SEO用のdescriptionを記事本文から生成するヘルパー関数
 const getMetaDescription = (blocks) => {
     if (!blocks) return "Neo Oracleのブログ記事。未来を、より深く、より面白く。";
     const firstParagraph = blocks.find(block => block.type === 'paragraph');
@@ -182,7 +189,10 @@ const BlogDetailPage = () => {
                         ))}
                     </div>
                 </div>
-                <div className="prose prose-invert max-w-none prose-h2:text-cyan-200 prose-a:text-indigo-400 hover:prose-a:text-indigo-300 prose-strong:text-white">
+                <div className="prose prose-invert max-w-none 
+                                prose-h2:text-cyan-200 
+                                prose-a:text-cyan-400 prose-a:underline prose-a:font-bold hover:prose-a:text-cyan-300 
+                                prose-strong:text-white">
                     {article.content?.blocks?.map((block, idx) => renderBlock(block, idx))}
                 </div>
             </article>

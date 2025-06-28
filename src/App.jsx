@@ -34,6 +34,7 @@ import SoulNumberDiagnoser from "@/pages/SoulNumberPage";
 import GeniusQuiz from "@/pages/HowGeniusPage";
 import DailySaying from "@/pages/DailySayingpage";
 import TodaySongPage from "@/pages/TodaySongPage";
+import IfYouWereInsectPage from "@/pages/IfYouWereInsectPage";
 import DashboardPage from "@/pages/commons/DashBoardPage";
 import BlogListPage from "@/pages/commons/BlogListPage";
 import BlogDetailPage from "@/pages/commons/BlogDetailPage";
@@ -132,6 +133,7 @@ function App() {
               <Route path="/how-much-genius" element={<GeniusQuiz />} />
               <Route path="/dailySaying" element={<DailySaying/>} />
               <Route path="/dailysong" element={<TodaySongPage/>}/>
+              <Route path="/if-you-were-insect" element={<IfYouWereInsectPage/>} />
             </Routes>
           </main>
           <Footer />

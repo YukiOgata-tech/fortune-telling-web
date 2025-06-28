@@ -8,6 +8,7 @@ import SoulNumberCTA from "@/components/CTAs/SoulNumberCTA";
 import HowGeniusCTA from "@/components/CTAs/HowGeniusCTA";
 import DailySayingCTA from "@/components/CTAs/DailySayingCTA";
 import TodaySongCTA from "@/components/CTAs/DailySongCTA";
+import IfYouWereInsectCTA from "@/components/CTAs/ifYouWereInsectCTA";
 
 const CTAS = [
   <DiagnoseCTA key="diagnose" />,
@@ -18,7 +19,8 @@ const CTAS = [
   <SoulNumberCTA key="soulnumber" />,
   <HowGeniusCTA key="howgenius" />,
   <DailySayingCTA key="dailysaying" />,
-  <TodaySongCTA key="dailysong" />
+  <TodaySongCTA key="dailysong" />,
+  <IfYouWereInsectCTA key="insect" />
 ];
 
 const CTAs = () => (
