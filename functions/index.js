@@ -1,3 +1,5 @@
+// functions/index.js
+
 const { SecretManagerServiceClient } = require('@google-cloud/secret-manager');
 const nodemailer = require('nodemailer');
 const functions = require('firebase-functions');
@@ -125,8 +127,16 @@ exports.dailyFortuneDigest = onSchedule(
     const url = buildFortuneUrl();
     const subject = "🌅 おはようございます！今日の運勢をチェック";
 
-    const snapshot = await db.collection("users").get();
-    const sendTasks = snapshot.docs.map((doc) => {
+    // emailVerifiedがtrue、かつwantsDailyDigestがtrueのユーザーのみを対象にする
+    const snapshot = await db.collection("users")
+                             .where("emailVerified", "==", true)
+                             .where("wantsDailyDigest", "==", true)
+                             .get();
+
+    if (snapshot.empty) {
+        console.log("No users to send daily digest.");
+        return null;
+    }    const sendTasks = snapshot.docs.map((doc) => {
       const { email, displayName = "" } = doc.data();
       if (!email) return Promise.resolve();
 

@@ -1,20 +1,31 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { User, BookOpen, Sparkles as SparklesIcon } from "lucide-react";
 import CTAs from "@/components/CTAs";
 import Seo from "@/components/Seo";
 
 const TopPage = () => {
+  const navigate = useNavigate();
+
+  // スクロール処理用の関数
+  const scrollToCTAs = () => {
+    const ctasSection = document.getElementById("diagnose-ctas");
+    if (ctasSection) {
+      ctasSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="min-h-screen text-white">
       <Seo
         title="Neo-Oracle | 未来技術で本当の自分を知る【無料性格診断・占い】"
         description="Neo-Oracleは、性格診断・恋愛傾向・仕事適性・今日の運勢など、多彩な無料占いを未来的なUIで楽しめる自己分析サイトです。あなたの隠れた才能や可能性を発見し、毎日を豊かにするヒントを見つけよう。"
         keywords="性格診断, 占い, 無料, 自己分析, 心理テスト, 運勢, 今日の歌, 名言, 仕事適性, 恋愛傾向, 生涯年収, 当たる"
-        image="/images/Top-banner.png" // OGP用の画像を指定
+        image="/images/Top-banner.png"
       />
 
       {/* ヒーローバナー */}
-      <section className="relative w-full flex flex-col items-center justify-center h-[40vh] md:h-[60vh] py-12 overflow-hidden ">
+      <section className="relative w-full flex flex-col items-center justify-center min-h-[50vh] md:min-h-[70vh] py-12 overflow-hidden ">
         <motion.div
           className="absolute inset-0 w-full h-full bg-gradient-to-bl from-indigo-800/30 via-fuchsia-700/20 to-black/30 opacity-65"
           initial={{ opacity: 0.5 }}
@@ -33,16 +44,47 @@ const TopPage = () => {
           <p className="text-lg md:text-3xl font-semibold text-white/90 mb-6 yuji-mai-regular">
             多ジャンルの診断・占いで“今”の自分を知ろう
           </p>
-          {/* バナー */}
-          <div className="w-[360px] md:w-[500px] lg:w-[700px] h-[220px] md:h-[300px] lg:h-[380px] rounded-xl bg-gray-700/30 flex items-center justify-center shadow-2xl mb-2">
+          <div className="w-[360px] md:w-[500px] lg:w-[700px] h-auto rounded-xl bg-gray-700/30 flex items-center justify-center shadow-2xl mb-2">
             <img
-              src="/images/Top-banner.png" // 生成画像のパス
+              src="/images/Top-banner.png"
               alt="NEO ORACLE バナー"
               className="w-full h-full object-cover rounded-xl shadow-2xl"
             />
           </div>
+
+          {/* === ★★★ 修正箇所 ★★★ === */}
+          <motion.div 
+            className="mt-6 sm:mt-8 flex flex-row items-center justify-center gap-2 sm:gap-4 w-full max-w-md sm:max-w-none px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0, transition: { delay: 0.5, duration: 0.8 } }}
+          >
+            <button
+              onClick={() => navigate('/login/to/neo-oracle')}
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-3 sm:px-6 rounded-xl bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white font-semibold text-sm shadow-lg transform hover:scale-105 transition-transform duration-300"
+            >
+              <User size={18} />
+              <span>マイページ</span>
+            </button>
+            <button
+              onClick={() => navigate('/blog')}
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-3 sm:px-6 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold text-sm shadow-lg transform hover:scale-105 transition-transform duration-300"
+            >
+              <BookOpen size={18} />
+              <span>コラム</span>
+            </button>
+            <button
+              onClick={scrollToCTAs}
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-3 sm:px-6 rounded-xl bg-gradient-to-r from-cyan-400 to-teal-500 text-white font-semibold text-sm shadow-lg transform hover:scale-105 transition-transform duration-300"
+            >
+              <SparklesIcon size={18} />
+              <span>診断</span>
+            </button>
+          </motion.div>
+          {/* === ここまで修正 === */}
+
         </motion.div>
       </section>
+
       {/* サイト紹介リード・SEO対応 */}
       <section className="w-full flex justify-center items-center py-8 mb-2">
         <motion.div
@@ -108,8 +150,8 @@ const TopPage = () => {
         </motion.div>
       </section>
 
-      {/* CTAグリッド */}
-      <div>
+      {/* CTAグリッド (idを追加) */}
+      <div id="diagnose-ctas">
         <CTAs />
       </div>
 

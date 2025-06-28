@@ -1,7 +1,17 @@
 // AuthContext.jsx — Email/Password + Google, Apple, Game Center 完全対応
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, sendEmailVerification, updateProfile, signInWithPopup, GoogleAuthProvider, OAuthProvider  } from "firebase/auth";
-
+import { 
+  onAuthStateChanged, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  sendPasswordResetEmail, 
+  sendEmailVerification, 
+  updateProfile, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  OAuthProvider
+} from "firebase/auth";
 
 import {
   doc,
@@ -14,13 +24,12 @@ import { httpsCallable } from "firebase/functions";
 // Centralised Firebase instances
 import { auth, db, functions } from "@/lib/firebase";
 
-
 const AuthContext = createContext({});
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [initializing, setInitializing] = useState(true);
+  const [loading, setLoading] = useState(true); // initializingからloadingに変更
 
   /* ――― ensure user profile doc exists ――― */
   const ensureProfileDoc = async (u) => {
@@ -28,11 +37,13 @@ export const AuthProvider = ({ children }) => {
     const ref = doc(db, "users", u.uid);
     const snap = await getDoc(ref);
     if (!snap.exists()) {
+      // ソーシャルログインなどで初めてログインした場合のドキュメント作成
       await setDoc(ref, {
         email: u.email,
         displayName: u.displayName || "",
         provider: u.providerData[0]?.providerId || "password",
         createdAt: serverTimestamp(),
+        emailVerified: u.emailVerified, // プロバイダの情報を正として保存
       });
     }
   };
@@ -40,8 +51,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
       setUser(u);
-      if (u) await ensureProfileDoc(u);
-      setInitializing(false);
+      if (u) {
+        await ensureProfileDoc(u);
+      }
+      setLoading(false); // initializingからloadingに変更
     });
     return unsub;
   }, []);
@@ -49,43 +62,68 @@ export const AuthProvider = ({ children }) => {
   /* ---------- Email / Password ---------- */
   const register = async (email, password, profile = {}) => {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
-    if (profile.displayName) await updateProfile(cred.user, { displayName: profile.displayName });
-    await sendEmailVerification(cred.user).catch(console.warn);
-    await setDoc(doc(db, "users", cred.user.uid), {
-      email,
+    const user = cred.user;
+
+    // 1. Authプロファイルに表示名を更新
+    if (profile.displayName) {
+      await updateProfile(user, { displayName: profile.displayName });
+    }
+
+    // 2. 確認メールを送信
+    await sendEmailVerification(user);
+
+    // 3. Firestoreにユーザー情報を保存（★★★ 修正点 ★★★）
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
       displayName: profile.displayName || "",
       provider: "password",
       createdAt: serverTimestamp(),
+      emailVerified: false, // ★★★ 新規登録時は必ずfalseに設定 ★★★
+      wantsDailyDigest: true,
     });
-    /* オンボーディングメールなど省略 */
+
+    // 4. Welcomeメール送信 (Cloud Functions)
+    try {
+        const sendWelcome = httpsCallable(functions, 'sendWelcomeEmail');
+        await sendWelcome({ email: user.email, displayName: profile.displayName });
+    } catch (error) {
+        console.error("Welcome email function call failed:", error);
+    }
+    
+    return cred; // userCredentialを返す
   };
 
-  const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   const logout = () => signOut(auth);
   const resetPassword = (email) => sendPasswordResetEmail(auth, email);
 
   /* ---------- Social login helpers ---------- */
-  const loginWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider());
+  const loginWithGoogle = () => {
+    return signInWithPopup(auth, new GoogleAuthProvider());
+  };
 
-  const loginWithApple = () => signInWithPopup(auth, new OAuthProvider("apple.com"));
+  const loginWithApple = () => {
+    return signInWithPopup(auth, new OAuthProvider("apple.com"));
+  };
 
-  
   /* ---------- Public value ---------- */
   const value = {
     user,
-    initializing,
+    loading, // initializingからloadingに変更
     register,
     login,
     logout,
     resetPassword,
     loginWithGoogle,
     loginWithApple,
-    
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!initializing && children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

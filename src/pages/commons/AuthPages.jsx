@@ -15,7 +15,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 const AuthLayout = ({ title, children }) => (
   <div className="relative min-h-screen overflow-hidden text-white">
     <div className="mx-auto flex max-w-5xl items-center justify-center px-4 py-24 md:py-32">
-      {/* カード */}
       <motion.div
         className="w-full max-w-xl rounded-2xl bg-white/10 backdrop-blur-lg md:ml-12"
         initial={{ opacity: 0, y: 30 }}
@@ -92,15 +91,7 @@ export const ResetPasswordPage = () => {
 /* -------------------- Login ------------------------ */
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const {
-    user,
-    login,
-    logout,
-    loginWithGoogle,
-    //loginWithApple,
-    //loginWithGameCenter,
-  } = useAuth();
-
+  const { user, login, logout, loginWithGoogle } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -108,12 +99,40 @@ export const LoginPage = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      navigate("/dashboard");
+      const userCredential = await login(email, password);
+      
+      // ★★★ 修正点 ★★★
+      // ログイン後、メール認証が済んでいるかチェック
+      if (userCredential.user.emailVerified) {
+        navigate("/dashboard"); // 認証済みならダッシュボードへ
+      } else {
+        navigate("/verify-email"); // 未認証なら確認ページへ
+      }
+
     } catch (err) {
-      setError(err.message);
+      setError("メールアドレスまたはパスワードが違います。");
+      console.error(err);
     }
   };
+  
+  // ソーシャルログイン後のリダイレクト処理
+  const handleSocialLogin = async (loginMethod) => {
+    try {
+      const userCredential = await loginMethod();
+      // ソーシャルログインの場合、多くはemailVerifiedがtrueだが、念のためチェック
+      if (userCredential.user.emailVerified) {
+        navigate("/dashboard");
+      } else {
+        // 万が一、プロバイダが未認証のメールを返す場合
+        navigate("/verify-email");
+      }
+    } catch (err) {
+      setError("ログインに失敗しました。");
+      console.error(err);
+    }
+  }
+
+
 
   /* 既にログインしている場合 */
   if (user) {
@@ -177,12 +196,8 @@ export const LoginPage = () => {
 
       {/* Social Buttons */}
       <div className="my-6 flex flex-col gap-3">
-        <Button
-          onClick={loginWithGoogle}
-          className="social-btn bg-white text-gray-800"
-        >
-          <img src="/images/google-icon.svg" className="h-5 mr-2" /> Google
-          で続行
+        <Button onClick={() => handleSocialLogin(loginWithGoogle)} className="social-btn bg-white text-gray-800">
+          <img src="/images/google-icon.svg" className="h-5 mr-2" alt="Google" /> Google で続行
         </Button>
         {/*<Button onClick={loginWithApple}  className="social-btn bg-black text-white">
           <img src="/apple.svg"  className="h-5 mr-2"/>  Apple で続行
@@ -218,9 +233,22 @@ export const RegisterPage = () => {
     e.preventDefault();
     try {
       await register(email, password, { displayName: name });
-      navigate("/dashboard");
+      
+      // 登録後、ダッシュボードではなくメール認証ページへ
+      navigate("/verify-email");
+
     } catch (err) {
       setError(err.message);
+    }
+  };
+  // ソーシャルログイン用のハンドラ
+  const handleSocialRegister = async (loginMethod) => {
+    try {
+      await loginMethod();
+      navigate("/dashboard"); // ソーシャルログインは通常emailVerified=trueなので直接ダッシュボードへ
+    } catch (err) {
+      setError("登録に失敗しました。");
+      console.error(err);
     }
   };
 
@@ -265,12 +293,8 @@ export const RegisterPage = () => {
       </div>
 
       <div className="my-6 flex flex-col gap-3">
-        <Button
-          onClick={loginWithGoogle}
-          className="social-btn bg-white text-gray-800"
-        >
-          <img src="/images/google-icon.svg" className="h-5 mr-2" /> Google
-          で登録
+        <Button onClick={() => handleSocialRegister(loginWithGoogle)} className="social-btn bg-white text-gray-800">
+          <img src="/images/google-icon.svg" className="h-5 mr-2" alt="Google" /> Google で登録
         </Button>
         {/*<Button onClick={loginWithApple}  className="social-btn bg-black text-white">
           <img src="/apple.svg"  className="h-5 mr-2"/>  Apple で登録
