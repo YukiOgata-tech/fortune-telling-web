@@ -9,17 +9,19 @@ import HowGeniusCTA from "@/components/CTAs/HowGeniusCTA";
 import DailySayingCTA from "@/components/CTAs/DailySayingCTA";
 import TodaySongCTA from "@/components/CTAs/DailySongCTA";
 import IfYouWereInsectCTA from "@/components/CTAs/ifYouWereInsectCTA";
+import LoveCompatibilityCTA from "@/components/CTAs/LoveCompatibilityCTA";
 
 const CTAS = [
   <DiagnoseCTA key="diagnose" />,
   <DailyFortuneCTA key="daily" />,
+  <TodaySongCTA key="dailysong" />,
+  <DailySayingCTA key="dailysaying" />,
   <WealthFortuneCTA key="wealth" />,
   <TarashidoCTA key="tarashido" />,
   <ReincarnationCTA key="reincarnation" />,
   <SoulNumberCTA key="soulnumber" />,
   <HowGeniusCTA key="howgenius" />,
-  <DailySayingCTA key="dailysaying" />,
-  <TodaySongCTA key="dailysong" />,
+  <LoveCompatibilityCTA key="love" />,
   <IfYouWereInsectCTA key="insect" />
 ];
 

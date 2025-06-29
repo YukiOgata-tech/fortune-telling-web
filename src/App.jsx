@@ -35,6 +35,7 @@ import GeniusQuiz from "@/pages/HowGeniusPage";
 import DailySaying from "@/pages/DailySayingpage";
 import TodaySongPage from "@/pages/TodaySongPage";
 import IfYouWereInsectPage from "@/pages/IfYouWereInsectPage";
+import LoveCompatibilityPage from "@/pages/LoveCompatibilityPage";
 import DashboardPage from "@/pages/commons/DashBoardPage";
 import BlogListPage from "@/pages/commons/BlogListPage";
 import BlogDetailPage from "@/pages/commons/BlogDetailPage";
@@ -134,6 +135,7 @@ function App() {
               <Route path="/dailySaying" element={<DailySaying/>} />
               <Route path="/dailysong" element={<TodaySongPage/>}/>
               <Route path="/if-you-were-insect" element={<IfYouWereInsectPage/>} />
+              <Route path="/love-compatibility" element={<LoveCompatibilityPage/>} />
             </Routes>
           </main>
           <Footer />
