@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }) => {
         console.error("Welcome email function call failed:", error);
     }
     
-    return cred; // userCredentialを返す
+    return cred;
   };
 
   const login = (email, password) => {

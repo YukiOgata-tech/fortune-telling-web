@@ -95,7 +95,7 @@ const Header = () => {
           <div className="flex items-center gap-2 cursor-pointer group" onClick={scrollToTop}>
             <Sparkles size={28} className="text-[#88f7ea] drop-shadow-glow group-hover:rotate-6 transition-transform" />
             <span className="text-xl md:text-2xl font-extrabold tracking-wide text-[#f5efff] drop-shadow-xl font-mono group-hover:text-[#c2a9fa] transition-colors biz-udpmincho-regular">
-              Neo Oracle | 占い・性格診断
+              Neo Oracle | 占い・診断
             </span>
           </div>
 
@@ -153,7 +153,7 @@ const Header = () => {
           )}
         </nav>
       </aside>
-      <img src={witchImg} alt="魔女" className={`fixed bottom-[-7rem] w-48 -translate-y-1/2 z-[102] pointer-events-none transition-transform duration-500 opacity-70 ${mobileDrawerOpen ? "right-[calc(4px+16rem)] translate-x-0" : "right-0 translate-x-full"}`} style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.6))" }} />
+      <img src={witchImg} alt="魔女" className={`fixed bottom-[-7rem] w-48 -translate-y-1/2 z-[102] pointer-events-none transition-transform duration-500 opacity-80 translate-x-20 ${mobileDrawerOpen ? "right-[calc(4px+16rem)] translate-x-0" : "right-0 translate-x-full"}`} style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.6))" }} />
 
       {/* PC用フルスクリーンメニュー */}
       <AnimatePresence>
@@ -163,7 +163,7 @@ const Header = () => {
               <X size={40} />
             </motion.button>
             <div className="relative w-full max-w-4xl flex flex-col md:flex-row items-center justify-center gap-10">
-              <motion.img src={witchImg} alt="メニューの魔女" className="w-56 h-auto md:w-80 pointer-events-none" style={{ filter: "drop-shadow(2px 4px 12px rgba(0,0,0,0.7))" }} initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0, transition: { delay: 0.2, duration: 0.5, ease: "easeOut" } }} />
+              <motion.img src={witchImg} alt="メニューの魔女" className="w-56 h-auto md:w-80 pointer-events-none translate-x-40" style={{ filter: "drop-shadow(2px 4px 12px rgba(0,0,0,0.7))" }} initial={{ opacity: 0, x: -100 }} animate={{ opacity: 1, x: 0, transition: { delay: 0.2, duration: 0.5, ease: "easeOut" } }} />
               <motion.nav className="w-full max-w-sm flex flex-col gap-3" initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } } }}>
                 {menuItems.map((item, index) => (
                   <motion.div key={index} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>

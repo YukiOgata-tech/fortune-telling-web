@@ -72,7 +72,7 @@ export const VerifyEmailPage = () => {
             {sent ? "再送しました" : "メールを再送信"}
           </Button>
         </div>
-        <div className="mt-6">
+        <div className="mt-6 text-black">
           <Button
             variant="outline"
             onClick={() => navigate("/login/to/neo-oracle")}

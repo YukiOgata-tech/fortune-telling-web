@@ -110,14 +110,7 @@ function App() {
                   </RequireAuth>
                 }
               />
-              <Route
-                path="/verify"
-                element={
-                  <RequireAuth>
-                    <VerifyEmailPage />
-                  </RequireAuth>
-                }
-              />
+              <Route path="/verify" element={<VerifyEmailPage />} />
               {/* 診断コンテンツ関連ページ */}
               <Route path="/fortune-wealth" element={<FortuneWealthHome />} />
               <Route

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { doc, setDoc, getDoc, collectionGroup, where, query, getDocs, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, collectionGroup, where, query, getDocs, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/components/features/AuthContext";
 import { updateProfile } from "firebase/auth";
@@ -138,6 +138,7 @@ function ProfileFields() {
   );
 }
 
+
 // ダッシュボードページ本体
 export default function DashboardPage() {
   const { user, loading: authLoading } = useAuth();
@@ -151,7 +152,7 @@ export default function DashboardPage() {
     if (!user) {
       navigate("/login/to/neo-oracle", { replace: true });
     } else if (!user.emailVerified) {
-      navigate("/verify-email", { replace: true });
+      navigate("/verify", { replace: true });
     }
   }, [user, authLoading, navigate]);
 
@@ -171,6 +172,26 @@ export default function DashboardPage() {
         </div>
     );
   }
+
+  // DashBoardPageコンポーネント内に追記
+const handleDeleteAccount = async () => {
+  if (!window.confirm("本当にアカウントを削除しますか？この操作は元に戻せません。")) return;
+  try {
+    // Firestoreのusersドキュメント削除
+    await deleteDoc(doc(db, "users", user.uid));
+    // Firebase Authのアカウント削除
+    await user.delete();
+    alert("アカウントを削除しました。ご利用ありがとうございました。");
+    navigate("/"); // トップページなどへ遷移
+  } catch (error) {
+    if (error.code === "auth/requires-recent-login") {
+      alert("セキュリティ上、再ログインが必要です。いったんログアウト後、再度ログインしてからお試しください。");
+      navigate("/login/to/neo-oracle");
+    } else {
+      alert("アカウント削除に失敗しました: " + error.message);
+    }
+  }
+};
 
   return (
     <div className="min-h-screen px-4 pb-20 pt-10 flex flex-col items-center text-gray-200 relative overflow-x-hidden">
@@ -216,8 +237,9 @@ export default function DashboardPage() {
               <div className="border-t border-white/20 my-1" />
               <SubscriptionSettings />
             </CardContent>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-col gap-2">
               <LogoutButton className="bg-red-600/30 hover:bg-red-600/60" />
+              <Button className="bg-red-700/80 hover:bg-red-800/90 text-white font-bold" onClick={handleDeleteAccount}>アカウント削除</Button>
             </div>
           </Card>
         </TabsContent>

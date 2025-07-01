@@ -235,7 +235,7 @@ export const RegisterPage = () => {
       await register(email, password, { displayName: name });
       
       // 登録後、ダッシュボードではなくメール認証ページへ
-      navigate("/verify-email");
+      navigate("/verify");
 
     } catch (err) {
       setError(err.message);
