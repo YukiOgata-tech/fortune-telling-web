@@ -101,7 +101,6 @@ export const LoginPage = () => {
     try {
       const userCredential = await login(email, password);
       
-      // ★★★ 修正点 ★★★
       // ログイン後、メール認証が済んでいるかチェック
       if (userCredential.user.emailVerified) {
         navigate("/dashboard"); // 認証済みならダッシュボードへ

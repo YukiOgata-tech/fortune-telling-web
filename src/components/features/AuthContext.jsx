@@ -1,4 +1,4 @@
-// AuthContext.jsx — Email/Password + Google, Apple, Game Center 完全対応
+// AuthContext.jsx — Email/Password + Google, Apple, Game Center 対応
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { 
   onAuthStateChanged, 

@@ -101,7 +101,7 @@ function App() {
               {/* アカウント作成・ログイン・PWリセット */}
               <Route path="/login/to/neo-oracle" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/reset" element={<ResetPasswordPage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route
                 path="/dashboard"
                 element={

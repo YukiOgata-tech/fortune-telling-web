@@ -52,7 +52,6 @@ const TopPage = () => {
             />
           </div>
 
-          {/* === ★★★ 修正箇所 ★★★ === */}
           <motion.div 
             className="mt-6 sm:mt-8 flex flex-row items-center justify-center gap-2 sm:gap-4 w-full max-w-md sm:max-w-none px-4"
             initial={{ opacity: 0, y: 20 }}
