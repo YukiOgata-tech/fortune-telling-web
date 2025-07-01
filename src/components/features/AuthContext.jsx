@@ -53,8 +53,16 @@ export const AuthProvider = ({ children }) => {
       setUser(u);
       if (u) {
         await ensureProfileDoc(u);
+        const ref = doc(db, "users", u.uid);
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+          const data = snap.data();
+          if (data.emailVerified !== u.emailVerified) {
+            await setDoc(ref, { emailVerified: u.emailVerified }, { merge: true });
+          }
+        }
       }
-      setLoading(false); // initializingからloadingに変更
+      setLoading(false);
     });
     return unsub;
   }, []);
