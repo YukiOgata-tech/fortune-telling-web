@@ -134,8 +134,8 @@ export default function TodaySongPage() {
         keywords="今日の歌, 音楽, 診断, 無料, おすすめ, J-POP, 洋楽, K-POP, プレイリスト, 毎日"
         image="/images/CTAs/bg-dailysong-cta.png"
       />
-      <div className="relative w-full max-w-2xl bg-slate-900/70 backdrop-blur-sm rounded-xl shadow-2xl p-6 sm:p-8 border border-cyan-500/20">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center tracking-wider text-cyan-300">
+      <div className="relative w-full max-w-2xl bg-slate-900/70 backdrop-blur-sm rounded-xl shadow-2xl p-6 sm:p-8 border border-cyan-500/20"> 
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center tracking-wider text-cyan-300 mochiy-pop-p-one-regular">
           今日の歌 診断
         </h1>
 

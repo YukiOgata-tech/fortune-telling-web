@@ -95,7 +95,7 @@ const Header = () => {
           <div className="flex items-center gap-2 cursor-pointer group" onClick={scrollToTop}>
             <Sparkles size={28} className="text-[#88f7ea] drop-shadow-glow group-hover:rotate-6 transition-transform" />
             <span className="text-xl md:text-2xl font-extrabold tracking-wide text-[#f5efff] drop-shadow-xl font-mono group-hover:text-[#c2a9fa] transition-colors biz-udpmincho-regular">
-              占いみたいな性格診断
+              Neo Oracle | 占い・性格診断
             </span>
           </div>
 
